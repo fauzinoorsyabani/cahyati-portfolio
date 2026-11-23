@@ -78,7 +78,7 @@ export function StageShell({
 }) {
   const width = useViewportWidth();
   return (
-    <div className="font-['Manrope',sans-serif] text-[#030303] antialiased">
+    <div className="font-['Manrope',sans-serif] text-[#0f172a] antialiased">
       {width >= DESKTOP_BREAKPOINT ? desktop : mobile}
     </div>
   );
@@ -117,17 +117,17 @@ export function ScaledStage({
   return (
     <Tag
       id={id}
-      className={`relative w-full overflow-hidden ${className}`}
+      className={`relative w-full overflow-hidden scroll-mt-[84px] ${className}`}
       style={{ height: measuredHeight * scale }}
     >
       <div
         ref={innerRef}
-        className="absolute left-0 top-0"
+        className="absolute left-1/2 top-0"
         style={{
           width: DESIGN_WIDTH,
           minHeight: height,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
+          transform: `translateX(-50%) scale(${scale})`,
+          transformOrigin: "top center",
         }}
       >
         {children}

@@ -4,7 +4,7 @@ status: accepted
 
 # Scaled 1440px Desktop Stage with Fluid Mobile Breakpoint
 
-Desktop viewports (`>= 1024px`) render each editorial section inside a unified 1440px proportional stage scaled to viewport width, while viewports below `1024px` switch to native fluid CSS grids. This preserves the exact editorial negative space, staggered card geometry, and asymmetric bento proportions recovered from the Capture reference template without breaking legibility on phones and tablets.
+Desktop viewports (`>= 1024px`) render each editorial section inside a unified 1440px proportional stage scaled to viewport width (capped at `1.2×` / `1728px` and centered horizontally inside full-bleed section surfaces on ultrawide monitors), while viewports below `1024px` switch to native fluid CSS grids. This preserves the exact editorial negative space, staggered card geometry, and asymmetric bento proportions recovered from the Capture reference template without breaking legibility on phones, tablets, or ultrawide displays.
 
 ## Considered Options
 

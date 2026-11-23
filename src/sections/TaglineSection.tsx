@@ -4,14 +4,14 @@ import { ScaledStage, StageShell } from "../primitives/Stage";
 function TaglineText({ big }: { big: boolean }) {
   return (
     <p
-      className={`shrink-0 whitespace-nowrap font-semibold text-[#030303] ${
+      className={`shrink-0 whitespace-nowrap font-semibold text-[#0f172a] ${
         big
           ? "pr-[96px] text-[120px] leading-[150px] tracking-[-7.2px]"
           : "pr-[40px] text-[64px] leading-[80px] tracking-[-3.84px] md:text-[88px] md:leading-[110px] md:tracking-[-5.28px]"
       }`}
     >
       I don’t just gather{" "}
-      <span className="font-editorial text-[#a8a8a8]">data</span>—I engineer
+      <span className="font-editorial text-[#2563eb]">data</span>—I engineer
       clarity.
     </p>
   );
@@ -19,7 +19,7 @@ function TaglineText({ big }: { big: boolean }) {
 
 export function TaglineSection() {
   const desktop = (
-    <ScaledStage height={246} className="bg-[#f1f1f1]">
+    <ScaledStage height={246} className="bg-[#f7f5f0]">
       <Marquee
         copies={3}
         duration={32000}
@@ -31,7 +31,7 @@ export function TaglineSection() {
   );
 
   const mobile = (
-    <section className="bg-[#f1f1f1] py-[12px] md:py-[32px]">
+    <section className="bg-[#f7f5f0] py-[12px] md:py-[32px]">
       <Marquee copies={3} duration={20000}>
         <TaglineText big={false} />
       </Marquee>

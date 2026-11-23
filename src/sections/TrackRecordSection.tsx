@@ -13,8 +13,8 @@ import { absBox, ScaledStage, StageShell } from "../primitives/Stage";
 function SectionLabel() {
   return (
     <div className="flex items-center gap-[6px]">
-      <NodeApertureIcon className="h-[22px] w-[22px] text-[#030303] transition-transform duration-700 hover:rotate-180" />
-      <p className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#444]">
+      <NodeApertureIcon className="h-[22px] w-[22px] text-[#2563eb] transition-transform duration-700 hover:rotate-180" />
+      <p className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#475569]">
         Track Record
       </p>
     </div>
@@ -23,16 +23,16 @@ function SectionLabel() {
 
 function Heading({ big }: { big: boolean }) {
   return big ? (
-    <h2 className="h-[146px] w-[420px] text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#030303]">
+    <h2 className="h-[146px] w-[420px] text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#0f172a]">
       Proven results{" "}
-      <span className="font-editorial text-[70px] leading-[80px] tracking-[-2.8px]">
+      <span className="font-editorial text-[#1d4ed8] text-[70px] leading-[80px] tracking-[-2.8px]">
         in practice
       </span>
     </h2>
   ) : (
-    <h2 className="text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#030303] md:text-[48px] md:leading-[58px]">
+    <h2 className="text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#0f172a] md:text-[48px] md:leading-[58px]">
       Proven results{" "}
-      <span className="font-editorial text-[40px] leading-[40px] tracking-[-1.6px] md:text-[60px] md:leading-[68px]">
+      <span className="font-editorial text-[#1d4ed8] text-[40px] leading-[40px] tracking-[-1.6px] md:text-[60px] md:leading-[68px]">
         in practice
       </span>
     </h2>
@@ -105,7 +105,7 @@ function HighlightCard({
             activeIndex={activeIndex}
             renderItem={(item) => (
               <div className="flex flex-col gap-[4px]">
-                <p className="text-[18px] font-semibold leading-[28px] tracking-[-0.18px] text-[#030303]">
+                <p className="text-[18px] font-semibold leading-[28px] tracking-[-0.18px] text-[#0f172a]">
                   {item.title}
                 </p>
                 <p className="text-[16px] leading-[22px] tracking-[-0.16px] text-[#505e71]">
@@ -117,7 +117,7 @@ function HighlightCard({
         </div>
         <p
           data-testid="active-highlight-index"
-          className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#a8a8a8]"
+          className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#2563eb]"
         >
           {formatIndexTag(activeIndex)}
         </p>
@@ -140,7 +140,7 @@ function ArrowControl({
       type="button"
       aria-label={dir === "prev" ? "Previous highlight" : "Next highlight"}
       onClick={onClick}
-      className={`group flex cursor-pointer items-center justify-center bg-[rgba(255,255,255,0.65)] text-[#030303] backdrop-blur-[4px] transition-[background-color,transform] duration-300 hover:bg-[rgba(255,255,255,0.92)] active:scale-95 ${
+      className={`group flex cursor-pointer items-center justify-center bg-[rgba(255,255,255,0.65)] text-[#0f172a] backdrop-blur-[4px] transition-[background-color,transform] duration-300 hover:bg-[rgba(255,255,255,0.92)] active:scale-95 ${
         small
           ? "h-[32px] w-[36px] rounded-[6px]"
           : "h-[44px] w-[49px] rounded-[8px]"
@@ -170,7 +170,7 @@ function HighlightVisual({
 }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-[16px] bg-[#dcdcdc] ${className}`}
+      className={`relative overflow-hidden rounded-[16px] bg-[#e5e0d5] ${className}`}
     >
       {highlights.map((item, idx) => (
         <img
@@ -202,7 +202,7 @@ export function TrackRecordSection({
   const next = () => setIndex((i) => cycleIndex(i, 1, highlights.length));
 
   const desktop = (
-    <ScaledStage id="testimonials" height={895} className="bg-[#f1f1f1]">
+    <ScaledStage id="track-record" height={895} className="bg-[#f7f5f0]">
       <Reveal style={absBox(135, 120)}>
         <SectionLabel />
       </Reveal>
@@ -212,7 +212,7 @@ export function TrackRecordSection({
       </Reveal>
 
       <Reveal delay={300} style={absBox(1177, 120)}>
-        <PillButton label="Let’s chat" href="#book" />
+        <PillButton label="Let’s chat" href="#inquiry" />
       </Reveal>
 
       <Reveal delay={100} style={absBox(135, 306, 470, 469)}>
@@ -235,8 +235,8 @@ export function TrackRecordSection({
 
   const mobile = (
     <section
-      id="testimonials"
-      className="bg-[#f1f1f1] px-[16px] pb-[48px] pt-[24px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
+      id="track-record"
+      className="scroll-mt-[84px] bg-[#f7f5f0] px-[16px] pb-[48px] pt-[24px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
     >
       <div className="flex flex-col gap-[16px] md:gap-[24px]">
         <Reveal>
@@ -247,7 +247,7 @@ export function TrackRecordSection({
             <Heading big={false} />
           </Reveal>
           <Reveal delay={250}>
-            <PillButton label="Let’s chat" href="#book" />
+            <PillButton label="Let’s chat" href="#inquiry" />
           </Reveal>
         </div>
       </div>

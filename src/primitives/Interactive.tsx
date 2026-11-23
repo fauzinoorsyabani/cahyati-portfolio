@@ -3,10 +3,10 @@ import { useReducedMotion } from "./Stage";
 
 export function PillButton({
   label,
-  href = "#book",
+  href = "#inquiry",
   bg = "#ffffff",
-  color = "#030303",
-  fill = "#030303",
+  color = "#0f172a",
+  fill = "#2563eb",
   textClass = "text-[16px] leading-[22px] h-[22px]",
   className = "",
   style,
@@ -26,7 +26,7 @@ export function PillButton({
     <a
       href={href}
       onClick={onClick}
-      className={`group relative inline-flex shrink-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-[999px] px-[28px] py-[10px] font-medium transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[3px] hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] active:scale-[0.96] ${className}`}
+      className={`group relative inline-flex shrink-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-[999px] px-[28px] py-[10px] font-medium shadow-[0_6px_18px_-10px_rgba(15,23,42,0.22)] transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[3px] hover:shadow-[0_14px_28px_-10px_rgba(37,99,235,0.45)] active:scale-[0.96] ${className}`}
       style={{ ...style, background: bg, color }}
     >
       <span
@@ -49,6 +49,13 @@ export function PillButton({
   );
 }
 
+const BADGE_GRADIENTS = [
+  "radial-gradient(circle at 30% 25%, #3b82f6, #1d4ed8)",
+  "radial-gradient(circle at 30% 25%, #f59e0b, #b45309)",
+  "radial-gradient(circle at 30% 25%, #14b8a6, #0f766e)",
+  "radial-gradient(circle at 30% 25%, #8b5cf6, #6d28d9)",
+] as const;
+
 export function MonogramStack({
   items,
   tone = "dark",
@@ -61,17 +68,14 @@ export function MonogramStack({
       {items.map((label, idx) => (
         <div
           key={label}
-          className={`relative flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-solid text-[12px] font-semibold tracking-[-0.04em] transition-transform duration-300 hover:z-10 hover:-translate-y-[4px] ${
+          className={`relative flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border-2 border-solid text-[12px] font-semibold tracking-[-0.04em] text-white transition-transform duration-300 hover:z-10 hover:-translate-y-[4px] ${
             tone === "dark"
-              ? "border-white/90 bg-[#141414] text-[#f2f2f2] shadow-[0_6px_14px_-6px_rgba(0,0,0,0.75)]"
-              : "border-white bg-[#111111] text-[#f2f2f2] shadow-[0_6px_14px_-6px_rgba(0,0,0,0.28)]"
+              ? "border-white/90 shadow-[0_8px_18px_-6px_rgba(11,18,33,0.75)]"
+              : "border-white shadow-[0_8px_18px_-6px_rgba(37,99,235,0.32)]"
           }`}
           style={{
             marginRight: idx < items.length - 1 ? -14 : 0,
-            backgroundImage:
-              idx % 2 === 0
-                ? "radial-gradient(circle at 30% 25%, #2b2b2b, #0c0c0c)"
-                : "radial-gradient(circle at 30% 25%, #3a3a3a, #141414)",
+            backgroundImage: BADGE_GRADIENTS[idx % BADGE_GRADIENTS.length],
           }}
         >
           {label}
@@ -286,7 +290,7 @@ export function RefractiveWordmark({
       />
 
       <div
-        className="pointer-events-none absolute overflow-hidden bg-[#080808]"
+        className="pointer-events-none absolute overflow-hidden bg-[#101b33]"
         style={{
           left: 10,
           top: 140.6,

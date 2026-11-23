@@ -26,21 +26,22 @@ export function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reducedMotion) return;
+    if (!el || reducedMotion || visible) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry) {
-          setVisible(entry.isIntersecting);
+        if (entry?.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.08 },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [reducedMotion]);
+  }, [reducedMotion, visible]);
 
   const isShown = reducedMotion || visible;
 
@@ -55,8 +56,8 @@ export function Reveal({
         filter: isShown ? "none" : "blur(12px)",
         transition: reducedMotion
           ? undefined
-          : `opacity 1100ms ${EASE_OUT_EXPO} ${delay}ms, transform 1100ms ${EASE_OUT_EXPO} ${delay}ms, filter 1100ms ${EASE_OUT_EXPO} ${delay}ms`,
-        willChange: "opacity, transform, filter",
+          : `opacity 850ms ${EASE_OUT_EXPO} ${delay}ms, transform 850ms ${EASE_OUT_EXPO} ${delay}ms, filter 850ms ${EASE_OUT_EXPO} ${delay}ms`,
+        willChange: isShown ? undefined : "opacity, transform, filter",
       }}
     >
       {children}

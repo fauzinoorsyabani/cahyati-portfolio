@@ -153,11 +153,20 @@ export interface LeadershipMandate {
   readonly impact: string;
 }
 
+export interface WorkExperience {
+  readonly id: string;
+  readonly role: string;
+  readonly organization: string;
+  readonly period: string;
+  readonly highlights: readonly string[];
+}
+
 export interface PortfolioSnapshot {
   readonly practitioner: PractitionerProfile;
   readonly navigation: readonly NavItem[];
   readonly footerNavigation: readonly NavItem[];
   readonly partnerMarks: readonly PartnerMark[];
+  readonly workExperience: readonly WorkExperience[];
   readonly caseStudies: readonly CaseStudy[];
   readonly capabilities: readonly Capability[];
   readonly whySection: WhySectionData;
@@ -231,7 +240,7 @@ const SNAPSHOT: PortfolioSnapshot = {
     { label: "Home", href: "#home" },
     { label: "About me", href: "#about" },
     { label: "Portfolio", href: "#portfolio" },
-    { label: "Capabilities", href: "#services" },
+    { label: "Capabilities", href: "#capabilities" },
   ],
   heroBadges: ["BQ", "BI", "BN", "3.9"],
   partnerMarks: [
@@ -240,6 +249,22 @@ const SNAPSHOT: PortfolioSnapshot = {
     { name: "BNSP Certified", subtitle: "Data Analyst", monogram: "BN" },
     { name: "RevoU Tech", subtitle: "Academy", monogram: "RV" },
     { name: "BigQuery & BI", subtitle: "Analytics Stack", monogram: "BQ" },
+  ],
+  workExperience: [
+    {
+      id: "yia-commercial-intern",
+      role: "Airport Commercial Intern",
+      organization: "PT Angkasa Pura Indonesia (YIA)",
+      period: "June 2025 – August 2025",
+      highlights: [
+        "Designed a QR-Code inventory solution for 1,000+ Ground Support Equipment (GSE) units, including verification and maintenance monitoring workflows.",
+        "Executed foundational ETL tasks: inventory data extraction, data cleaning, and transformation for weekly reporting.",
+        "Conducted routine Commercial Tenant inspections using the Commercial Inspection application to ensure safety, upkeep, and airport SOP compliance.",
+        "Carried out field surveys and accompanied business visits with the Commercial team across check-in and boarding lounge zones to gather location data and partner needs.",
+        "Analyzed air cargo business workflows and delivered discovery questions plus data architecture and system integration recommendations for pipeline readiness.",
+        "Collaborated across Commercial, Operations, and Secretariat teams to accelerate partner document validation and sign-off.",
+      ],
+    },
   ],
   caseStudies: [
     {
@@ -257,8 +282,8 @@ const SNAPSHOT: PortfolioSnapshot = {
       ],
       tools: ["QR-Code Workflows", "Microsoft Excel", "Data Modeling", "SOP Verification"],
       imageSrc: "/images/project-gse-airport.jpg",
-      imageAlt: "Monochrome view of airport ground support equipment aligned beside a modern terminal",
-      desktopBox: { x: 185, y: 322, w: 370 },
+      imageAlt: "Full-color view of airport apron with ground support equipment and aircraft at takeoff",
+      desktopBox: { x: 185, y: 370, w: 370 },
     },
     {
       id: "weekly-etl-reporting",
@@ -273,10 +298,10 @@ const SNAPSHOT: PortfolioSnapshot = {
         "Transformed multi-sheet operational logs into clean analytical views.",
         "Accelerated cross-team partner document validation with Commercial and Secretariat.",
       ],
-      tools: ["ETL Cleaning", "Google BigQuery", "Microsoft Excel", "Looker Studio"],
+      tools: ["ETL Extraction", "Data Cleaning", "Microsoft Excel", "Weekly Reporting"],
       imageSrc: "/images/project-etl-pipeline.jpg",
-      imageAlt: "Monochrome close-up of brushed aluminum data infrastructure racks",
-      desktopBox: { x: 785, y: 374, w: 370 },
+      imageAlt: "Full-color view of high-density network switch infrastructure and golden patch cables",
+      desktopBox: { x: 785, y: 422, w: 370 },
     },
     {
       id: "air-cargo-architecture",
@@ -291,10 +316,10 @@ const SNAPSHOT: PortfolioSnapshot = {
         "Authored technical discovery questionnaires for IT and operations alignment.",
         "Proposed integration pathways preparing cargo workflows for automated pipelines.",
       ],
-      tools: ["Systems Analysis", "Data Architecture", "Google BigQuery", "Process Mapping"],
+      tools: ["Systems Analysis", "Data Architecture", "Pipeline Readiness", "Process Mapping"],
       imageSrc: "/images/project-cargo-architecture.jpg",
-      imageAlt: "Monochrome architectural geometry of an international air cargo hangar",
-      desktopBox: { x: 255, y: 889, w: 470 },
+      imageAlt: "Full-color view of a wide-body air cargo freighter loading on a bright tarmac",
+      desktopBox: { x: 255, y: 937, w: 470 },
     },
     {
       id: "commercial-tenant-inspection",
@@ -311,8 +336,8 @@ const SNAPSHOT: PortfolioSnapshot = {
       ],
       tools: ["Commercial Inspection App", "Field Data Collection", "SOP Compliance", "Reporting"],
       imageSrc: "/images/project-tenant-inspection.jpg",
-      imageAlt: "Monochrome architectural corridor of a sunlit airport commercial terminal",
-      desktopBox: { x: 885, y: 1007, w: 370 },
+      imageAlt: "Full-color interior of a modern airport transit concourse with illuminated glass atrium",
+      desktopBox: { x: 885, y: 1055, w: 370 },
     },
     {
       id: "bi-governance-dashboards",
@@ -329,8 +354,8 @@ const SNAPSHOT: PortfolioSnapshot = {
       ],
       tools: ["Power BI", "Looker Studio", "Google BigQuery", "Document Governance"],
       imageSrc: "/images/project-bi-dashboard.jpg",
-      imageAlt: "Monochrome desk study with laptop and architectural analytical notes",
-      desktopBox: { x: 485, y: 1468, w: 370 },
+      imageAlt: "Monochrome workstation laptop displaying clean geometric BI charts and analytics KPIs",
+      desktopBox: { x: 485, y: 1516, w: 370 },
     },
   ],
   capabilities: [
@@ -340,7 +365,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       description:
         "Building structured extraction, data cleaning, and transformation routines that keep operational tables accurate and reporting-ready.",
       imageSrc: "/images/project-etl-pipeline.jpg",
-      imageAlt: "Brushed steel data center infrastructure representing ETL pipelines",
+      imageAlt: "High-density golden network switch infrastructure representing ETL pipelines",
       objectPosition: "center 35%",
       desktopRow: { top: 0, height: 102, titleTop: 14 },
     },
@@ -350,7 +375,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       description:
         "Turning clean datasets into executive Power BI, Looker Studio, and Excel dashboards that surface clear trends at a glance.",
       imageSrc: "/images/project-bi-dashboard.jpg",
-      imageAlt: "Minimalist studio workspace with laptop and structured analytical grids",
+      imageAlt: "Minimalist studio workstation laptop showing structured monochrome analytics dashboards",
       objectPosition: "center 50%",
       desktopRow: { top: 122, height: 102, titleTop: 14 },
     },
@@ -360,7 +385,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       description:
         "Structuring scalable cloud datasets in Google BigQuery with disciplined schemas, validation logic, and repeatable metric definitions.",
       imageSrc: "/images/editorial-glass-prism.jpg",
-      imageAlt: "Architectural glass louvers refracting geometric light lines",
+      imageAlt: "Modern terracotta and blue-glass high-rise facade representing structured schemas",
       objectPosition: "center 45%",
       desktopRow: { top: 244, height: 98, titleTop: 10 },
     },
@@ -370,7 +395,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       description:
         "Designing QR-Code asset workflows, field inspection pipelines, and cargo integration blueprints bridging physical operations with IT.",
       imageSrc: "/images/project-gse-airport.jpg",
-      imageAlt: "Airport ground support equipment lined along a modern glass terminal",
+      imageAlt: "Airport apron with ground support vehicles and commercial aircraft operations",
       objectPosition: "center 60%",
       desktopRow: { top: 362, height: 98, titleTop: 10 },
     },
@@ -378,9 +403,9 @@ const SNAPSHOT: PortfolioSnapshot = {
       id: "governance-leadership",
       title: "Governance & Ops",
       description:
-        "Bringing quarterly reporting discipline, RAB financial tracking, and cross-functional coordination forged across 12+ leadership mandates.",
+        "Bringing quarterly reporting discipline, RAB financial tracking, and cross-functional coordination forged across 12 leadership mandates.",
       imageSrc: "/images/editorial-leadership.jpg",
-      imageAlt: "Minimalist modern executive conference room with geometric light",
+      imageAlt: "Modern glass-walled office workspace with slate-blue and warm amber accents",
       objectPosition: "center 50%",
       desktopRow: { top: 480, height: 98, titleTop: 10 },
     },
@@ -391,7 +416,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       label: "Airport GSE units structured via QR-Code workflows",
     },
     secondaryMetric: {
-      value: "7+",
+      value: "7",
       label: "Certifications & medals",
     },
     highlightMetric: {
@@ -403,7 +428,7 @@ const SNAPSHOT: PortfolioSnapshot = {
     viewfinderImageSrc: "/images/editorial-glass-prism.jpg",
     viewfinderImageAlt: "Precision architectural light lines symbolizing clean data schemas",
     detailImageSrc: "/images/editorial-data-desk.jpg",
-    detailImageAlt: "Tactile monochrome study of brushed aluminum laptop and mechanical keyboard",
+    detailImageAlt: "Aerial golden-hour view of a hyperscale cloud data center campus",
     credentialBadges: ["BN", "RV", "AU", "AG"],
     polaroids: [
       {
@@ -427,7 +452,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       {
         id: "p3",
         imageSrc: "/images/project-bi-dashboard.jpg",
-        imageAlt: "Analytical grid desk",
+        imageAlt: "BI analytics dashboard workstation",
         box: [45.45, 72.98, 159.781, 138.646],
         frame: [141.096, 114.64],
         photo: [136.687, 100.31],
@@ -461,7 +486,7 @@ const SNAPSHOT: PortfolioSnapshot = {
         top: 100,
         tiles: [
           { id: "r2-1", imageSrc: "/images/project-tenant-inspection.jpg", imageAlt: "Airport concourse" },
-          { id: "r2-2", imageSrc: "/images/project-bi-dashboard.jpg", imageAlt: "Analytics studio" },
+          { id: "r2-2", imageSrc: "/images/project-bi-dashboard.jpg", imageAlt: "BI dashboard workstation" },
           { id: "r2-3", imageSrc: "/images/editorial-glass-prism.jpg", imageAlt: "Glass prism light" },
           { id: "r2-4", imageSrc: "/images/editorial-leadership.jpg", imageAlt: "Governance room" },
           { id: "r2-5", imageSrc: "/images/editorial-data-desk.jpg", imageAlt: "Minimalist desk" },
@@ -472,10 +497,10 @@ const SNAPSHOT: PortfolioSnapshot = {
         offset: -27,
         top: 209,
         tiles: [
-          { id: "r3-1", imageSrc: "/images/editorial-glass-vault.jpg", imageAlt: "Glass vault arch" },
-          { id: "r3-2", imageSrc: "/images/editorial-shadow-grid.jpg", imageAlt: "Shadow grid geometry" },
-          { id: "r3-3", imageSrc: "/images/hero-bg.jpg", imageAlt: "Terminal perspective" },
-          { id: "r3-4", imageSrc: "/images/cahyati-about-portrait.jpg", imageAlt: "Cahyati at studio desk" },
+          { id: "r3-1", imageSrc: "/images/hero-bg.jpg", imageAlt: "Terminal perspective" },
+          { id: "r3-2", imageSrc: "/images/cahyati-about-portrait.jpg", imageAlt: "Cahyati at studio desk" },
+          { id: "r3-3", imageSrc: "/images/project-etl-pipeline.jpg", imageAlt: "ETL infrastructure" },
+          { id: "r3-4", imageSrc: "/images/project-bi-dashboard.jpg", imageAlt: "Analytics KPI display" },
         ],
       },
     ],
@@ -488,7 +513,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       title: "PT Angkasa Pura Indonesia (YIA)",
       subtitle: "Airport Commercial Intern · Jun – Aug 2025",
       imageSrc: "/images/project-gse-airport.jpg",
-      imageAlt: "Monochrome airport ground support operations at dusk",
+      imageAlt: "Full-color international airport apron and ground support equipment operations",
       objectPosition: "center 55%",
     },
     {
@@ -498,35 +523,33 @@ const SNAPSHOT: PortfolioSnapshot = {
       title: "BNSP Certified & 3.92 GPA",
       subtitle: "Academic Excellence & Data Credentials · 2024 – 2026",
       imageSrc: "/images/editorial-campus-hall.jpg",
-      imageAlt: "Monochrome university architectural library atrium",
+      imageAlt: "Modern sculptural curved university library atrium in natural daylight",
       objectPosition: "center 50%",
     },
     {
       id: "governance-mandates",
       summary:
-        "Modernized administrative archives and quarterly reporting as General Secretary of BLM FT-UNSIL, supervised Creative Economy & Secretariat divisions at HMSI, and directed budgets, PR, and execution across 12+ campus initiatives.",
+        "Modernized administrative archives and quarterly reporting as General Secretary of BLM FT-UNSIL, supervised Creative Economy & Secretariat divisions at HMSI, and directed budgets, PR, and execution across 12 campus initiatives.",
       title: "BLM & HMSI FT-UNSIL Leadership",
-      subtitle: "12+ Organizational Mandates · 2023 – 2025",
+      subtitle: "12 Organizational Mandates · 2023 – 2025",
       imageSrc: "/images/editorial-leadership.jpg",
-      imageAlt: "Minimalist monochrome conference table and geometric skylight",
+      imageAlt: "Contemporary glass office collaboration space with warm accent seating",
       objectPosition: "center 50%",
     },
   ],
   galleryFrames: [
     { id: "g-01", imageSrc: "/images/project-gse-airport.jpg", imageAlt: "Airport GSE inventory operations", caption: "YIA GSE Inventory" },
     { id: "g-02", imageSrc: "/images/cahyati-about-portrait.jpg", imageAlt: "Cahyati working in a minimalist concrete studio", caption: "Workspace & Systems" },
-    { id: "g-03", imageSrc: "/images/project-etl-pipeline.jpg", imageAlt: "Monochrome server rack infrastructure", caption: "ETL Infrastructure" },
+    { id: "g-03", imageSrc: "/images/project-etl-pipeline.jpg", imageAlt: "High-density data network switches", caption: "ETL Infrastructure" },
     { id: "g-04", imageSrc: "/images/editorial-campus-hall.jpg", imageAlt: "University library staircase architecture", caption: "Universitas Siliwangi" },
     { id: "g-05", imageSrc: "/images/project-cargo-architecture.jpg", imageAlt: "Air cargo logistics hangar geometry", caption: "Cargo Pipeline Study" },
     { id: "g-06", imageSrc: "/images/editorial-glass-prism.jpg", imageAlt: "Architectural glass light refraction", caption: "Schema Clarity" },
     { id: "g-07", imageSrc: "/images/project-tenant-inspection.jpg", imageAlt: "Modern airport commercial concourse", caption: "Tenant Inspection" },
     { id: "g-08", imageSrc: "/images/editorial-data-desk.jpg", imageAlt: "Brushed aluminum laptop and mechanical keyboard", caption: "Analytical Craft" },
-    { id: "g-09", imageSrc: "/images/project-bi-dashboard.jpg", imageAlt: "Laptop beside architectural analytical grid notes", caption: "Power BI & Looker" },
-    { id: "g-10", imageSrc: "/images/cahyati-hero-portrait.jpg", imageAlt: "Editorial studio portrait of Cahyati", caption: "Cahyati — Data Engineer" },
+    { id: "g-09", imageSrc: "/images/project-bi-dashboard.jpg", imageAlt: "Laptop displaying monochrome BI charts and KPI dashboards", caption: "Power BI & Looker" },
+    { id: "g-10", imageSrc: "/images/cahyati-hero-portrait.jpg", imageAlt: "Full-color editorial studio portrait of Cahyati", caption: "Cahyati — Data Engineer" },
     { id: "g-11", imageSrc: "/images/editorial-leadership.jpg", imageAlt: "Minimalist executive governance room", caption: "BLM FT-UNSIL" },
-    { id: "g-12", imageSrc: "/images/editorial-glass-vault.jpg", imageAlt: "Glass terminal arch architectural detail", caption: "Spatial Surveys" },
-    { id: "g-13", imageSrc: "/images/editorial-shadow-grid.jpg", imageAlt: "Skylight grid shadows on concrete floor", caption: "Structured Reporting" },
-    { id: "g-14", imageSrc: "/images/hero-bg.jpg", imageAlt: "Monochrome architectural terminal corridor", caption: "Operational Scale" },
+    { id: "g-12", imageSrc: "/images/hero-bg.jpg", imageAlt: "Sunlit international airport glass terminal hall", caption: "Operational Scale" },
   ],
   faqEntries: [
     {
@@ -623,7 +646,7 @@ const SNAPSHOT: PortfolioSnapshot = {
       role: "General Secretary (Sekretaris Umum)",
       organization: "BLM FT-UNSIL",
       period: "Mar – Dec 2025",
-      impact: "Reformed institutional administration, documented internal/ORMAWA meetings, and delivered quarterly reports.",
+      impact: "Reformed institutional administration, recorded internal and ORMAWA meetings, maintained archives, and delivered quarterly reports.",
     },
     {
       role: "Head of Household Affairs Department",
@@ -635,13 +658,19 @@ const SNAPSHOT: PortfolioSnapshot = {
       role: "Event Operations Staff",
       organization: "Sivolution Festival 2.0 HMSI FT-UNSIL",
       period: "Sep – Nov 2024",
-      impact: "Built competition rundowns, coordinated speakers/vendors, and evaluated post-event execution.",
+      impact: "Built competition rundowns, coordinated speakers, talent, and vendors, and evaluated post-event execution.",
     },
     {
       role: "Public Relations Coordinator",
-      organization: "SMART 2024 & Kelas PKM HMSI FT-UNSIL",
+      organization: "SMART 2024 HMSI FT-UNSIL",
       period: "Sep – Nov 2024",
-      impact: "Led external correspondence, stakeholder communication, and participant coordination.",
+      impact: "Distributed official correspondence, coordinated external stakeholders, and managed participant communications.",
+    },
+    {
+      role: "Public Relations Coordinator",
+      organization: "Kelas PKM HMSI FT-UNSIL",
+      period: "Sep – Oct 2024",
+      impact: "Coordinated with Marikator and led program outreach to participants and external parties.",
     },
     {
       role: "Treasurer (Bendahara)",
@@ -657,15 +686,33 @@ const SNAPSHOT: PortfolioSnapshot = {
     },
     {
       role: "Fundraising & Sponsorship Division",
-      organization: "Kopma Expo 2023 & DIKSARKOP 2023",
-      period: "Sep – Nov 2023",
-      impact: "Set revenue targets, marketed products, and managed external sponsorship partnerships.",
+      organization: "Kopma Expo 2023 Universitas Siliwangi",
+      period: "Nov 2023",
+      impact: "Set revenue targets, marketed products, and coordinated external sponsorship partnerships.",
+    },
+    {
+      role: "Event Division Staff & MC",
+      organization: "MABIM HMSI FT-UNSIL",
+      period: "Oct – Nov 2023",
+      impact: "Hosted opening-to-closing sessions as MC, managed participant flow, and synchronized cross-division event execution.",
+    },
+    {
+      role: "Event Division",
+      organization: "Graphic Design Training CSG JDCOM Kopma Unsil",
+      period: "Oct 2023",
+      impact: "Designed the event concept and coordinated end-to-end execution to maintain a smooth, conducive program.",
+    },
+    {
+      role: "Fundraising & Sponsorship Division",
+      organization: "DIKSARKOP 2023 Kopma Unsil",
+      period: "Sep 2023",
+      impact: "Managed fundraising targets, product marketing, and sponsorship outreach for member onboarding.",
     },
     {
       role: "Journalist Division",
       organization: "CSG JDCOM Kopma Unsil",
       period: "Mar – Nov 2023",
-      impact: "Produced JD. Expression editorial coverage for flagship KOPMA UNSIL events.",
+      impact: "Led JD. Expression editorial reporting and coverage across CSG programs and flagship KOPMA UNSIL events.",
     },
   ],
 };

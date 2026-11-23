@@ -6,25 +6,30 @@ import { describe, expect, it } from "vitest";
 import { App } from "./App";
 
 describe("Full portfolio application seam", () => {
-  it("mounts all 11 Capture-structured sections and resolves every internal hash link to a real element", () => {
+  it("mounts all 11 Capture-structured sections with domain-aligned IDs and resolves every internal hash link to a real element", () => {
     const { container } = render(<App />);
 
     const expectedIds = [
       "home",
       "about",
       "portfolio",
-      "services",
+      "capabilities",
       "why",
       "faq",
-      "testimonials",
+      "track-record",
       "gallery",
-      "book",
+      "inquiry",
       "contact",
     ];
 
     for (const id of expectedIds) {
       expect(container.querySelector(`#${id}`)).not.toBeNull();
     }
+
+    // Zero leftover Capture photography section IDs
+    expect(container.querySelector("#services")).toBeNull();
+    expect(container.querySelector("#testimonials")).toBeNull();
+    expect(container.querySelector("#book")).toBeNull();
 
     const hashLinks = Array.from(
       container.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'),
@@ -72,6 +77,11 @@ describe("Full portfolio application seam", () => {
       expect(
         screen.getByRole("button", { name: /close menu/i }),
       ).toHaveAttribute("aria-expanded", "true");
+
+      await user.keyboard("{Escape}");
+      expect(
+        screen.getByRole("button", { name: /open menu/i }),
+      ).toHaveAttribute("aria-expanded", "false");
     } finally {
       if (originalClientWidth) {
         Object.defineProperty(

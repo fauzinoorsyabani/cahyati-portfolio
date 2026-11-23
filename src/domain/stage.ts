@@ -1,9 +1,10 @@
 export const DESIGN_WIDTH = 1440;
 export const DESKTOP_BREAKPOINT = 1024;
+export const MAX_DESKTOP_SCALE = 1.2;
 export const HERO_FRAME_INSET = 30;
 export const HERO_INNER_WIDTH = 1380;
 export const CAROUSEL_WIDTH = 1670;
-export const CAROUSEL_PAIR_ANGLES = [90, 120, 150, 180, 0, 30, 60] as const;
+export const CAROUSEL_PAIR_ANGLES = [90, 120, 150, 0, 30, 60] as const;
 
 export interface DesktopStageMetrics {
   readonly isDesktop: boolean;
@@ -29,7 +30,7 @@ export function computeDesktopStage(
   designHeight: number,
 ): DesktopStageMetrics {
   const safeWidth = Math.max(320, viewportWidth);
-  const scale = safeWidth / DESIGN_WIDTH;
+  const scale = Math.min(safeWidth / DESIGN_WIDTH, MAX_DESKTOP_SCALE);
   return {
     isDesktop: safeWidth >= DESKTOP_BREAKPOINT,
     scale,
@@ -43,7 +44,10 @@ export function computeHeroStage(
 ): HeroStageMetrics {
   const safeWidth = Math.max(DESKTOP_BREAKPOINT, viewportWidth);
   const safeHeight = Math.max(400, viewportHeight);
-  const scale = (safeWidth - 2 * HERO_FRAME_INSET) / HERO_INNER_WIDTH;
+  const scale = Math.min(
+    (safeWidth - 2 * HERO_FRAME_INSET) / HERO_INNER_WIDTH,
+    MAX_DESKTOP_SCALE,
+  );
   const frameHeight = Math.max(600 * scale, safeHeight - 2 * HERO_FRAME_INSET);
   const innerHeight = frameHeight / scale;
   const contentTop = innerHeight - 800 + 359;

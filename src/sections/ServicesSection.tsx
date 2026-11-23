@@ -11,9 +11,9 @@ export function ServicesSection({
   const [activeIndex, setActiveIndex] = useState(0);
 
   const desktop = (
-    <ScaledStage id="services" height={862} className="bg-[#010101]">
+    <ScaledStage id="capabilities" height={862} className="bg-[#0b1221]">
       <Reveal style={absBox(135, 120, 370, 281)}>
-        <div className="relative h-[281px] w-[370px] overflow-hidden rounded-[16px] bg-[#141414]">
+        <div className="relative h-[281px] w-[370px] overflow-hidden rounded-[16px] bg-[#13203b]">
           {capabilities.map((cap, idx) => (
             <div
               key={cap.id}
@@ -43,7 +43,7 @@ export function ServicesSection({
             <p
               key={cap.id}
               aria-hidden={idx !== activeIndex}
-              className={`${idx === 0 ? "relative" : "absolute inset-x-0 top-0"} text-[20px] font-medium leading-[30px] tracking-[-0.2px] text-[#f2f2f2]`}
+              className={`${idx === 0 ? "relative" : "absolute inset-x-0 top-0"} text-[20px] font-medium leading-[30px] tracking-[-0.2px] text-[#f8fafc]`}
               style={{
                 opacity: idx === activeIndex ? 1 : 0,
                 transform: idx === activeIndex ? "none" : "translateY(10px)",
@@ -60,7 +60,7 @@ export function ServicesSection({
       <Reveal delay={250} style={absBox(135, 706)}>
         <a
           href="#portfolio"
-          className="link-underline-retract whitespace-nowrap text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#f2f2f2]"
+          className="link-underline-retract whitespace-nowrap text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#f8fafc]"
         >
           Check out my work
         </a>
@@ -91,7 +91,7 @@ export function ServicesSection({
               >
                 <span
                   className="absolute left-0 top-0 flex items-start gap-[4px] whitespace-nowrap transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  style={{ color: isActive ? "#f2f2f2" : "#767676" }}
+                  style={{ color: isActive ? "#f8fafc" : "#64748b" }}
                 >
                   <span
                     className="text-[54px] font-semibold leading-[68px] tracking-[-2.16px]"
@@ -104,11 +104,11 @@ export function ServicesSection({
                   </span>
                 </span>
                 <span
-                  className="absolute left-0 h-px w-full bg-[#444]"
+                  className="absolute left-0 h-px w-full bg-[#1e2f4f]"
                   style={{ top: cap.desktopRow.height }}
                 />
                 <span
-                  className="absolute left-0 h-px bg-[#f2f2f2] transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="absolute left-0 h-px bg-[#3b82f6] transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{
                     top: cap.desktopRow.height,
                     width: isActive ? "100%" : "0%",
@@ -124,28 +124,23 @@ export function ServicesSection({
 
   const mobile = (
     <section
-      id="services"
-      className="bg-[#010101] px-[16px] pb-[60px] pt-[40px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
+      id="capabilities"
+      className="scroll-mt-[84px] bg-[#0b1221] px-[16px] pb-[60px] pt-[40px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
     >
       <div className="grid grid-cols-1 gap-[40px] md:grid-cols-2 md:gap-x-[24px] md:gap-y-[48px]">
         {capabilities.map((cap, idx) => (
           <Reveal key={cap.id} delay={(idx % 2) * 100}>
             <div className="flex flex-col gap-[36px]">
               <div className="flex flex-col gap-[20px]">
-                <button
-                  type="button"
-                  aria-pressed={idx === activeIndex}
-                  onClick={() => setActiveIndex(idx)}
-                  className="flex cursor-pointer items-start gap-[5px] text-left text-[#f2f2f2]"
-                >
+                <h3 className="flex items-start gap-[5px] text-left text-[#f8fafc]">
                   <span className="mt-[14px] max-w-[280px] text-[32px] font-semibold leading-[40px] tracking-[-0.64px]">
                     {cap.title}
                   </span>
                   <span className="text-[16px] leading-[22px] tracking-[-0.16px]">
                     {formatIndexTag(idx)}
                   </span>
-                </button>
-                <div className="group relative aspect-[343/190] w-full overflow-hidden rounded-[16px] bg-[#141414]">
+                </h3>
+                <div className="group relative aspect-[343/190] w-full overflow-hidden rounded-[16px] bg-[#13203b]">
                   <img
                     src={cap.imageSrc}
                     alt={cap.imageAlt}
@@ -154,11 +149,11 @@ export function ServicesSection({
                     style={{ objectPosition: cap.objectPosition }}
                   />
                 </div>
-                <p className="text-[18px] font-medium leading-[28px] tracking-[-0.18px] text-[#f2f2f2]">
+                <p className="text-[18px] font-medium leading-[28px] tracking-[-0.18px] text-[#f8fafc]">
                   {cap.description}
                 </p>
               </div>
-              <div className="h-px w-full bg-[#444]" />
+              <div className="h-px w-full bg-[#1e2f4f]" />
             </div>
           </Reveal>
         ))}
@@ -167,7 +162,7 @@ export function ServicesSection({
       <Reveal className="mt-[40px]">
         <a
           href="#portfolio"
-          className="link-underline-retract text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#f2f2f2]"
+          className="link-underline-retract text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#f8fafc]"
         >
           Check out my work
         </a>

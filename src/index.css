@@ -3,8 +3,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #f1f1f1;
-    color: #030303;
+    overflow-x: clip;
+    background-color: #f7f5f0;
+    color: #0f172a;
     font-family: "Manrope", system-ui, -apple-system, sans-serif;
   }
 
@@ -16,14 +17,14 @@
 
   body {
     margin: 0;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: #030303;
-    color: #f2f2f2;
+    background-color: #2563eb;
+    color: #ffffff;
   }
 }
 

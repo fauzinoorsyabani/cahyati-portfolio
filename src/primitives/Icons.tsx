@@ -70,22 +70,22 @@ export function WatermarkApertureSvg({
         cx="332"
         cy="332"
         r="298"
-        stroke="#030303"
-        strokeOpacity="0.06"
+        stroke="#2563eb"
+        strokeOpacity="0.08"
         strokeWidth="18"
       />
       <circle
         cx="332"
         cy="332"
         r="128"
-        stroke="#030303"
-        strokeOpacity="0.055"
+        stroke="#d97706"
+        strokeOpacity="0.08"
         strokeWidth="12"
       />
       <path
         d="M396 221L555 496M268 221H585M204 332L363 57M268 443L109 168M396 443H79M460 332L301 607"
-        stroke="#030303"
-        strokeOpacity="0.055"
+        stroke="#2563eb"
+        strokeOpacity="0.07"
         strokeWidth="16"
         strokeLinecap="round"
       />
@@ -126,12 +126,12 @@ export function PlaySnapshotIcon({ className = "" }: { className?: string }) {
         cx="37"
         cy="37"
         r="35.5"
-        fill="rgba(255,255,255,0.22)"
-        stroke="rgba(255,255,255,0.75)"
+        fill="rgba(37,99,235,0.22)"
+        stroke="rgba(255,255,255,0.85)"
         strokeWidth="1.5"
       />
-      <circle cx="37" cy="37" r="24" fill="#ffffff" />
-      <path d="M33.5 29.8L45.2 37L33.5 44.2V29.8Z" fill="#030303" />
+      <circle cx="37" cy="37" r="24" fill="#2563eb" />
+      <path d="M33.5 29.8L45.2 37L33.5 44.2V29.8Z" fill="#ffffff" />
     </svg>
   );
 }
@@ -148,7 +148,7 @@ export function StarRowIcon({ className = "" }: { className?: string }) {
         <path
           key={cx}
           d={`M${cx} 1.2l1.62 3.45 3.8.52-2.77 2.65.68 3.78L${cx} 9.78l-3.33 1.82.68-3.78-2.77-2.65 3.8-.52L${cx} 1.2z`}
-          fill="#030303"
+          fill="#f59e0b"
         />
       ))}
     </svg>

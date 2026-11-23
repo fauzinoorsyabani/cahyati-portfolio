@@ -1,15 +1,18 @@
 import { describe, expect, it } from "vitest";
 import {
   applyCarouselDrag,
+  CAROUSEL_PAIR_ANGLES,
   computeDesktopStage,
   computeHeroStage,
   cycleIndex,
   DESKTOP_BREAKPOINT,
+  HERO_FRAME_INSET,
+  MAX_DESKTOP_SCALE,
   stepCarouselFrame,
 } from "./stage";
 
 describe("Stage scaling and 3D carousel physics seam", () => {
-  it("computes exact proportional desktop stage dimensions at 1440px and 1024px", () => {
+  it("computes exact proportional desktop stage dimensions at 1440px and 1024px, and caps scale on ultrawide viewports", () => {
     expect(computeDesktopStage(1440, 1022)).toEqual({
       isDesktop: true,
       scale: 1,
@@ -23,9 +26,14 @@ describe("Stage scaling and 3D carousel physics seam", () => {
 
     const tablet = computeDesktopStage(DESKTOP_BREAKPOINT - 1, 1000);
     expect(tablet.isDesktop).toBe(false);
+
+    const ultrawide = computeDesktopStage(2560, 1000);
+    expect(ultrawide.isDesktop).toBe(true);
+    expect(ultrawide.scale).toBe(MAX_DESKTOP_SCALE);
+    expect(ultrawide.scaledHeight).toBeCloseTo(1000 * MAX_DESKTOP_SCALE, 4);
   });
 
-  it("clamps hero inner height to at least 600 * scale on short viewports", () => {
+  it("clamps hero inner height on short viewports and keeps total hero height within ultrawide viewports", () => {
     const standard = computeHeroStage(1440, 900);
     expect(standard.scale).toBe(1);
     expect(standard.frameHeight).toBe(840);
@@ -36,6 +44,16 @@ describe("Stage scaling and 3D carousel physics seam", () => {
     expect(shortViewport.frameHeight).toBe(600);
     expect(shortViewport.innerHeight).toBe(600);
     expect(shortViewport.contentTop).toBe(159);
+
+    const ultrawide = computeHeroStage(2560, 1080);
+    expect(ultrawide.scale).toBeLessThanOrEqual(MAX_DESKTOP_SCALE);
+    expect(ultrawide.frameHeight + 2 * HERO_FRAME_INSET).toBeLessThanOrEqual(1080);
+  });
+
+  it("spaces 3D cylinder carousel diameters uniquely modulo 180deg so no two frames collide coplanar", () => {
+    const normalizedDiameters = CAROUSEL_PAIR_ANGLES.map((deg) => ((deg % 180) + 180) % 180);
+    expect(new Set(normalizedDiameters).size).toBe(CAROUSEL_PAIR_ANGLES.length);
+    expect(CAROUSEL_PAIR_ANGLES).toHaveLength(6);
   });
 
   it("advances 3D cylinder carousel with inertia decay and halts auto-spin under reduced motion", () => {

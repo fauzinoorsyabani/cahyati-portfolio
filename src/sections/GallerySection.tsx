@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import type { GalleryFrame } from "../domain/portfolio";
 import {
   applyCarouselDrag,
@@ -121,12 +121,33 @@ function CylinderCarousel({ frames }: { frames: readonly GalleryFrame[] }) {
     };
   }, [reducedMotion]);
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const step = event.key === "ArrowRight" ? -30 : 30;
+    motionRef.current = {
+      angle: motionRef.current.angle + step,
+      velocity: 0,
+      isDragging: false,
+    };
+    if (rotorRef.current) {
+      rotorRef.current.style.transform = `rotateY(${motionRef.current.angle}deg)`;
+    }
+  };
+
   return (
     <div
       ref={stageRef}
-      onPointerEnter={() => setHovered(true)}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Editorial visual gallery — drag or use Left and Right arrow keys to rotate"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "touch") setHovered(true);
+      }}
       onPointerLeave={() => setHovered(false)}
-      className={`relative select-none touch-pan-y ${
+      className={`relative select-none touch-pan-y outline-none focus-visible:ring-2 focus-visible:ring-[#030303]/40 focus-visible:ring-offset-4 ${
         dragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       style={{ width: CAROUSEL_WIDTH, height: 640 }}
@@ -144,6 +165,7 @@ function CylinderCarousel({ frames }: { frames: readonly GalleryFrame[] }) {
       >
         <div
           ref={rotorRef}
+          data-testid="gallery-rotor"
           className="absolute inset-0"
           style={{
             transformStyle: "preserve-3d",
@@ -170,7 +192,7 @@ function CylinderCarousel({ frames }: { frames: readonly GalleryFrame[] }) {
                 return (
                   <div
                     key={frame.id}
-                    className="absolute overflow-hidden rounded-[20px] bg-[#e4e4e4]"
+                    className="absolute overflow-hidden rounded-[20px] bg-[#e5e0d5]"
                     style={{
                       left: side === 0 ? 0 : 1140,
                       top: -65,
@@ -203,7 +225,7 @@ function CylinderCarousel({ frames }: { frames: readonly GalleryFrame[] }) {
         }}
       >
         <div
-          className="whitespace-nowrap rounded-[999px] bg-[rgba(255,255,255,0.78)] px-[20px] py-[11px] text-[18px] font-medium leading-[24px] tracking-[-0.18px] text-[#030303] shadow-[0_8px_24px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[6px] transition-[opacity,transform] duration-300"
+          className="whitespace-nowrap rounded-[999px] bg-[rgba(255,255,255,0.78)] px-[20px] py-[11px] text-[18px] font-medium leading-[24px] tracking-[-0.18px] text-[#0f172a] shadow-[0_8px_24px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[6px] transition-[opacity,transform] duration-300"
           style={{
             opacity: hovered && !dragging ? 1 : 0,
             transform: hovered && !dragging ? "scale(1)" : "scale(0.85)",
@@ -225,7 +247,7 @@ export function GallerySection({
   const mobileScale = Math.max(viewportWidth / CAROUSEL_WIDTH, 0.42);
 
   const desktop = (
-    <ScaledStage id="gallery" height={585} className="bg-[#f1f1f1]">
+    <ScaledStage id="gallery" height={585} className="bg-[#f7f5f0]">
       <Reveal
         style={{
           position: "absolute",
@@ -252,7 +274,7 @@ export function GallerySection({
   const mobile = (
     <section
       id="gallery"
-      className="relative overflow-hidden bg-[#f1f1f1] py-[24px] md:py-[48px]"
+      className="relative scroll-mt-[84px] overflow-hidden bg-[#f7f5f0] py-[24px] md:py-[48px]"
     >
       <Reveal>
         <div className="relative" style={{ height: 440 * mobileScale }}>

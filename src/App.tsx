@@ -15,7 +15,7 @@ export function App() {
   const portfolio = getPortfolioSnapshot();
 
   return (
-    <main className="min-h-screen bg-[#f1f1f1]">
+    <main className="min-h-screen bg-[#f7f5f0]">
       <HeroSection
         practitioner={portfolio.practitioner}
         navigation={portfolio.navigation}
@@ -24,6 +24,7 @@ export function App() {
       <AboutSection
         practitioner={portfolio.practitioner}
         partnerMarks={portfolio.partnerMarks}
+        workExperience={portfolio.workExperience}
         credentials={portfolio.credentials}
         leadershipMandates={portfolio.leadershipMandates}
       />

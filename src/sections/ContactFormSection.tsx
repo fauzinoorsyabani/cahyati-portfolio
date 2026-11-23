@@ -5,10 +5,10 @@ import { Reveal } from "../primitives/Motion";
 import { ScaledStage, StageShell } from "../primitives/Stage";
 
 const INPUT_CLASS =
-  "w-full rounded-[10px] border border-solid border-[#e2e2e2] bg-[#f1f1f1] px-[14px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#030303] outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-[#a8a8a8] hover:border-[#cfcfcf] focus:border-[#030303] focus:bg-white focus:shadow-[0_0_0_4px_rgba(3,3,3,0.06)]";
+  "w-full rounded-[10px] border border-solid border-[#dfd9cc] bg-[#f7f5f0] px-[14px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#0f172a] outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-[#2563eb] hover:border-[#cfcfcf] focus:border-[#2563eb] focus:bg-white focus:shadow-[0_0_0_4px_rgba(37,99,235,0.14)]";
 
 const LABEL_CLASS =
-  "text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#040404]";
+  "text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#0f172a]";
 
 function defaultOpenMailto(href: string) {
   window.location.href = href;
@@ -21,7 +21,7 @@ function PractitionerBadge({
 }) {
   return (
     <div className="flex items-center gap-[20px]">
-      <div className="group relative h-[73px] w-[79px] overflow-hidden rounded-[8px] bg-[#141414]">
+      <div className="group relative h-[73px] w-[79px] overflow-hidden rounded-[8px] bg-[#13203b]">
         <img
           src={practitioner.portraitSrc}
           alt={practitioner.name}
@@ -29,10 +29,10 @@ function PractitionerBadge({
         />
       </div>
       <div className="flex flex-col">
-        <p className="text-[18px] font-semibold leading-[28px] tracking-[-0.18px] text-[#040404]">
+        <p className="text-[18px] font-semibold leading-[28px] tracking-[-0.18px] text-[#0f172a]">
           {practitioner.name}
         </p>
-        <p className="text-[16px] leading-[22px] tracking-[-0.16px] text-[#444]">
+        <p className="text-[16px] leading-[22px] tracking-[-0.16px] text-[#475569]">
           {practitioner.roleShort}
         </p>
       </div>
@@ -42,18 +42,18 @@ function PractitionerBadge({
 
 function ContactHeading({ big }: { big: boolean }) {
   return big ? (
-    <h2 className="text-center text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#030303]">
+    <h2 className="text-center text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#0f172a]">
       Have a role or data project?
       <br />
-      <span className="font-editorial text-[70px] leading-[80px] tracking-[-2.8px]">
+      <span className="font-editorial text-[#1d4ed8] text-[70px] leading-[80px] tracking-[-2.8px]">
         Let’s build together.
       </span>
     </h2>
   ) : (
-    <h2 className="text-center text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#030303] md:text-[48px] md:leading-[58px]">
+    <h2 className="text-center text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#0f172a] md:text-[48px] md:leading-[58px]">
       Have a role or data project?
       <br />
-      <span className="font-editorial text-[40px] leading-[48px] tracking-[-1.6px] md:text-[60px] md:leading-[68px]">
+      <span className="font-editorial text-[#1d4ed8] text-[40px] leading-[48px] tracking-[-1.6px] md:text-[60px] md:leading-[68px]">
         Let’s build together.
       </span>
     </h2>
@@ -95,32 +95,32 @@ function InquiryCard({
   return (
     <div className="w-full rounded-[16px] bg-white p-[30px] max-[767px]:p-[20px]">
       <div className="flex flex-col items-center gap-[8px] text-center">
-        <p className="text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#444]">
+        <p className="text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#475569]">
           E-mail me at
         </p>
         <a
           href={`mailto:${practitioner.email}`}
-          className="link-underline-reveal break-all text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#030303] max-[767px]:text-[20px] max-[767px]:leading-[28px]"
+          className="link-underline-reveal break-all text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#0f172a] max-[767px]:text-[20px] max-[767px]:leading-[28px]"
         >
           {practitioner.email}
         </a>
       </div>
 
-      <div className="my-[30px] h-px bg-[#ececec]" />
+      <div className="my-[30px] h-px bg-[#e8e3d9]" />
 
       {submitted ? (
         <div className="flex flex-col items-center gap-[10px] py-[40px] text-center">
-          <p className="text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#030303]">
+          <p className="text-[26px] font-medium leading-[36px] tracking-[-0.78px] text-[#0f172a]">
             Thank you!
           </p>
-          <p className="max-w-[420px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#444]">
+          <p className="max-w-[420px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#475569]">
             Your mail app should open with your message ready for{" "}
             {practitioner.name}. I’ll get back to you shortly.
           </p>
           <button
             type="button"
             onClick={() => setSubmitted(false)}
-            className="link-underline-reveal mt-[10px] cursor-pointer text-[16px] font-medium text-[#030303]"
+            className="link-underline-reveal mt-[10px] cursor-pointer text-[16px] font-medium text-[#0f172a]"
           >
             Send another message
           </button>
@@ -131,7 +131,7 @@ function InquiryCard({
           onSubmit={handleSubmit}
           className="flex flex-col gap-[24px]"
         >
-          <p className="text-[16px] leading-[22px] tracking-[-0.16px] text-[#444]">
+          <p className="text-[16px] leading-[22px] tracking-[-0.16px] text-[#475569]">
             Or simply leave your details, and I’ll respond as soon as possible.
           </p>
 
@@ -183,11 +183,11 @@ function InquiryCard({
 
           <button
             type="submit"
-            className="group relative flex h-[52px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-[999px] bg-[#030303] text-[16px] font-medium text-white transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[3px] hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+            className="group relative flex h-[52px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-[999px] bg-[#2563eb] text-[16px] font-medium text-white transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[3px] hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] active:scale-[0.98]"
           >
             <span
               aria-hidden="true"
-              className="absolute inset-0 -translate-x-[101%] rounded-[999px] bg-[#3a3a3a] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
+              className="absolute inset-0 -translate-x-[101%] rounded-[999px] bg-[#1d4ed8] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0"
             />
             <span className="relative block h-[22px] overflow-hidden leading-[22px]">
               <span className="block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
@@ -215,7 +215,7 @@ export function ContactFormSection({
   onOpenMailto?: (href: string) => void;
 }) {
   const desktop = (
-    <ScaledStage id="book" height={900} className="bg-[#f1f1f1]">
+    <ScaledStage id="inquiry" height={900} className="bg-[#f7f5f0]">
       <div className="relative mx-auto flex w-[770px] flex-col items-center pb-[120px] pt-[80px]">
         <Reveal>
           <PractitionerBadge practitioner={practitioner} />
@@ -235,8 +235,8 @@ export function ContactFormSection({
 
   const mobile = (
     <section
-      id="book"
-      className="bg-[#f1f1f1] px-[16px] pb-[60px] pt-[40px] md:px-[40px] md:pb-[80px] md:pt-[64px]"
+      id="inquiry"
+      className="scroll-mt-[84px] bg-[#f7f5f0] px-[16px] pb-[60px] pt-[40px] md:px-[40px] md:pb-[80px] md:pt-[64px]"
     >
       <div className="mx-auto flex max-w-[770px] flex-col items-center">
         <Reveal>

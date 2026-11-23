@@ -8,8 +8,8 @@ import { absBox, ScaledStage, StageShell } from "../primitives/Stage";
 function FaqLabel() {
   return (
     <div className="flex items-center gap-[6px]">
-      <NodeApertureIcon className="h-[22px] w-[22px] text-[#030303] transition-transform duration-700 hover:rotate-180" />
-      <p className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#444]">
+      <NodeApertureIcon className="h-[22px] w-[22px] text-[#2563eb] transition-transform duration-700 hover:rotate-180" />
+      <p className="whitespace-nowrap text-[20px] leading-[30px] tracking-[-0.2px] text-[#475569]">
         FAQ
       </p>
     </div>
@@ -29,6 +29,7 @@ function FaqAccordion({
     <div className="flex w-full flex-col gap-[30px]">
       {entries.map((entry, idx) => {
         const isOpen = openIndex === idx;
+        const panelId = `faq-panel-${entry.id}`;
         return (
           <Reveal key={entry.id} delay={90 * idx}>
             <div
@@ -39,32 +40,35 @@ function FaqAccordion({
               <button
                 type="button"
                 aria-expanded={isOpen}
+                aria-controls={panelId}
                 onClick={() => setOpenIndex(isOpen ? null : idx)}
                 className={`flex w-full cursor-pointer items-center justify-between gap-[16px] text-left ${
-                  big ? "h-[88px]" : "min-h-[88px] py-[22px]"
+                  big ? "min-h-[88px] py-[20px]" : "min-h-[88px] py-[22px]"
                 }`}
               >
                 <span className="flex items-start gap-[5px]">
                   <span
                     className={
                       big
-                        ? "whitespace-nowrap text-[20px] font-medium leading-[30px] tracking-[-0.2px] text-[#080808]"
-                        : "text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#080808]"
+                        ? "text-[20px] font-medium leading-[30px] tracking-[-0.2px] text-[#0f172a]"
+                        : "text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#0f172a]"
                     }
                   >
                     {entry.question}
                   </span>
-                  <span className="shrink-0 text-[14px] leading-[20px] tracking-[-0.28px] text-[#a8a8a8]">
+                  <span className="shrink-0 text-[14px] leading-[20px] tracking-[-0.28px] text-[#2563eb]">
                     {formatIndexTag(idx)}
                   </span>
                 </span>
                 <CrosshairPlusIcon
-                  className="h-[24px] w-[24px] shrink-0 text-[#080808] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="h-[24px] w-[24px] shrink-0 text-[#0f172a] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ transform: isOpen ? "rotate(135deg)" : "none" }}
                 />
               </button>
 
               <div
+                id={panelId}
+                aria-hidden={!isOpen}
                 className="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
               >
@@ -74,7 +78,7 @@ function FaqAccordion({
                       big
                         ? "pb-[29px] pr-[60px] text-[16px] leading-[24px]"
                         : "pb-[22px] text-[15px] leading-[22px]"
-                    } tracking-[-0.16px] text-[#444] transition-opacity duration-500`}
+                    } tracking-[-0.16px] text-[#475569] transition-opacity duration-500`}
                     style={{ opacity: isOpen ? 1 : 0 }}
                   >
                     {entry.answer}
@@ -91,7 +95,7 @@ function FaqAccordion({
 
 export function FaqSection({ entries }: { entries: readonly FaqEntry[] }) {
   const desktop = (
-    <ScaledStage id="faq" height={1006} className="bg-[#f1f1f1]">
+    <ScaledStage id="faq" height={1006} className="bg-[#f7f5f0]">
       <Reveal style={absBox(135, 120)}>
         <FaqLabel />
       </Reveal>
@@ -99,17 +103,17 @@ export function FaqSection({ entries }: { entries: readonly FaqEntry[] }) {
       <div className="relative ml-[535px] w-[770px] pb-[120px] pt-[120px]">
         <div className="flex items-start justify-between">
           <Reveal delay={200}>
-            <h2 className="h-[146px] w-[440px] text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#030303]">
+            <h2 className="h-[146px] w-[440px] text-[54px] font-semibold leading-[68px] tracking-[-2.16px] text-[#0f172a]">
               Frequently
               <br />
               asked{" "}
-              <span className="font-editorial text-[70px] leading-[80px] tracking-[-2.8px]">
+              <span className="font-editorial text-[#1d4ed8] text-[70px] leading-[80px] tracking-[-2.8px]">
                 questions
               </span>
             </h2>
           </Reveal>
           <Reveal delay={300}>
-            <PillButton label="Let’s chat" href="#book" />
+            <PillButton label="Let’s chat" href="#inquiry" />
           </Reveal>
         </div>
 
@@ -123,7 +127,7 @@ export function FaqSection({ entries }: { entries: readonly FaqEntry[] }) {
   const mobile = (
     <section
       id="faq"
-      className="bg-[#f1f1f1] px-[16px] pb-[40px] pt-[24px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
+      className="scroll-mt-[84px] bg-[#f7f5f0] px-[16px] pb-[40px] pt-[24px] md:px-[40px] md:pb-[80px] md:pt-[72px]"
     >
       <div className="md:grid md:grid-cols-[240px_1fr] md:gap-[32px]">
         <div className="flex flex-col gap-[16px]">
@@ -131,15 +135,15 @@ export function FaqSection({ entries }: { entries: readonly FaqEntry[] }) {
             <FaqLabel />
           </Reveal>
           <Reveal delay={150}>
-            <h2 className="max-w-[260px] text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#030303]">
+            <h2 className="max-w-[260px] text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-[#0f172a]">
               Frequently asked{" "}
-              <span className="font-editorial text-[40px] leading-[40px] tracking-[-1.6px]">
+              <span className="font-editorial text-[#1d4ed8] text-[40px] leading-[40px] tracking-[-1.6px]">
                 questions
               </span>
             </h2>
           </Reveal>
           <Reveal delay={250} className="mt-[14px]">
-            <PillButton label="Let’s chat" href="#book" />
+            <PillButton label="Let’s chat" href="#inquiry" />
           </Reveal>
         </div>
 

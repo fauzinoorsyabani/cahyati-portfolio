@@ -12,6 +12,10 @@ _Avoid_: User, author, photographer, freelancer
 A core technical or operational discipline offered by the Practitioner, showcased in the interactive index (for example, ETL & Data Pipelines or BI & Visualization).
 _Avoid_: Service, offering, skill item
 
+**Work Experience**:
+A formal employment or internship placement held by the Practitioner, recording role, organization, dates, and verified deliverables.
+_Avoid_: Job entry, resume block, bio bullet
+
 **Case Study**:
 A concrete field project, internship deliverable, or analytical artifact executed by the Practitioner, including scope, tools, and measurable outcome.
 _Avoid_: Work item, photo shoot, portfolio card
@@ -29,11 +33,11 @@ A verified impact summary pairing measurable evidence from the Practitioner's CV
 _Avoid_: Testimonial, review, client quote
 
 **Metric Highlight**:
-A headline quantitative proof point drawn directly from the Practitioner's CV (such as `1,000+` inventoried airport GSE units, `3.92` GPA, or `7+` certifications and medals).
+A headline quantitative proof point drawn directly from the Practitioner's CV (such as `1,000+` inventoried airport GSE units, `3.92` GPA, or `7` certifications and medals).
 _Avoid_: Stat box, KPI widget, bento tile
 
 **Gallery Frame**:
-A curated monochrome editorial photograph displayed inside the interactive 3D showcase cylinder or visual strips.
+A curated full-color editorial photograph displayed inside the interactive 3D showcase cylinder or visual strips.
 _Avoid_: Slide, photo tile, media item
 
 **Inquiry**:

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { NavItem, PractitionerProfile } from "../domain/portfolio";
 import {
   computeHeroStage,
@@ -6,6 +6,7 @@ import {
   DESKTOP_BREAKPOINT,
   HERO_FRAME_INSET,
   HERO_INNER_WIDTH,
+  MAX_DESKTOP_SCALE,
 } from "../domain/stage";
 import { CrosshairPlusIcon, RegisteredMarkIcon } from "../primitives/Icons";
 import { MonogramStack, PillButton } from "../primitives/Interactive";
@@ -51,10 +52,11 @@ function ShutterPreloader({
     const timers = [
       window.setTimeout(() => setPhase(1), 450),
       window.setTimeout(() => setPhase(2), 1120),
+      // Bar 5 starts at 1120 + 5 * 105 = 1645ms and lasts 580ms -> finishes at 2225ms
       window.setTimeout(() => {
         setPhase(3);
         document.documentElement.style.overflow = prevOverflow;
-      }, 1820),
+      }, 2280),
     ];
 
     return () => {
@@ -75,7 +77,7 @@ function ShutterPreloader({
         {Array.from({ length: 6 }, (_, idx) => (
           <div
             key={idx}
-            className="h-full flex-1 bg-[#010101]"
+            className="h-full flex-1 bg-[#0b1221]"
             style={{
               marginRight: idx < 5 ? -1 : 0,
               transformOrigin: "50% -15.6%",
@@ -88,13 +90,13 @@ function ShutterPreloader({
 
       {phase < 2 && (
         <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[10px]">
-          <div className="relative flex h-[60px] items-start">
-            <div className="flex h-[60px] overflow-hidden">
+          <div className="relative flex h-[68px] items-start">
+            <div className="flex h-[68px] overflow-hidden">
               {wordmark.split("").map((char, idx) => (
                 <span
                   key={`${char}-${idx}`}
                   className="block h-[79px] overflow-hidden"
-                  style={{ marginTop: -9 }}
+                  style={{ marginTop: -6 }}
                 >
                   <span
                     className="flex flex-col"
@@ -115,7 +117,7 @@ function ShutterPreloader({
                 </span>
               ))}
             </div>
-            <RegisteredMarkIcon className="ml-[3px] mt-[13px] h-[16px] w-[17px] text-white" />
+            <RegisteredMarkIcon className="ml-[3px] mt-[15px] h-[16px] w-[17px] text-white" />
           </div>
           <p className="whitespace-nowrap text-[20px] font-medium leading-[30px] tracking-[-0.2px] text-white">
             {tagline}
@@ -154,6 +156,7 @@ function FloatingHeader({
   const viewportWidth = useViewportWidth();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const mobileHeaderRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -162,25 +165,56 @@ function FloatingHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (viewportWidth >= DESKTOP_BREAKPOINT && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [viewportWidth, menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (
+        mobileHeaderRef.current &&
+        !mobileHeaderRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [menuOpen]);
+
   if (viewportWidth >= DESKTOP_BREAKPOINT) {
+    const headerScale = Math.max(
+      0.85,
+      Math.min(viewportWidth / DESIGN_WIDTH, MAX_DESKTOP_SCALE),
+    );
     return (
       <header
         className="fixed left-1/2 top-0 z-50 font-['Manrope',sans-serif] antialiased"
         style={{
-          transform: `translate(-50%, ${scrolled ? 10 : HERO_FRAME_INSET + 30}px) scale(${viewportWidth / DESIGN_WIDTH})`,
+          transform: `translate(-50%, ${scrolled ? 10 : HERO_FRAME_INSET + 30}px) scale(${headerScale})`,
           transformOrigin: "top center",
           transition: `transform 500ms ${EASE}`,
         }}
       >
         <nav
           aria-label="Primary navigation"
-          className="flex items-center justify-center gap-[80px] rounded-[999px] bg-[#010101] py-[10px] pl-[20px] pr-[10px] ring-1 ring-white/10"
+          className="flex items-center justify-center gap-[80px] rounded-[999px] bg-[#0b1221] py-[10px] pl-[20px] pr-[10px] ring-1 ring-white/10"
         >
           <BrandWordmark
             wordmark={wordmark}
             className="text-[19.225px] leading-[24.718px] tracking-[-0.9613px]"
           />
-          <div className="flex items-center gap-[24px] text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#f2f2f2]">
+          <div className="flex items-center gap-[24px] text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#f8fafc]">
             {navigation.map((item) => (
               <a
                 key={item.href}
@@ -193,10 +227,10 @@ function FloatingHeader({
           </div>
           <PillButton
             label="Contact me"
-            href="#book"
+            href="#inquiry"
             bg="#f1f2f4"
             color="#181c23"
-            fill="#3a3a3a"
+            fill="#2563eb"
             textClass="text-[14px] leading-[20px] h-[20px]"
           />
         </nav>
@@ -206,6 +240,7 @@ function FloatingHeader({
 
   return (
     <header
+      ref={mobileHeaderRef}
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-[26px] font-['Manrope',sans-serif] antialiased"
       style={{
         transform: `translateY(${scrolled ? 10 : viewportWidth >= 768 ? HERO_FRAME_INSET + 24 : 28}px)`,
@@ -215,13 +250,13 @@ function FloatingHeader({
       <div className="relative z-20">
         <nav
           aria-label="Primary navigation"
-          className="flex items-center justify-center gap-[80px] rounded-[999px] bg-[#010101] px-[24px] py-[12px] ring-1 ring-white/10 md:gap-[56px] md:py-[10px] md:pl-[20px] md:pr-[10px]"
+          className="flex items-center justify-center gap-[56px] rounded-[999px] bg-[#0b1221] px-[24px] py-[12px] ring-1 ring-white/10 sm:gap-[80px] md:gap-[56px] md:py-[10px] md:pl-[20px] md:pr-[10px]"
         >
           <BrandWordmark
             wordmark={wordmark}
             className="text-[18.239px] leading-[23.451px] tracking-[-0.912px]"
           />
-          <div className="hidden items-center gap-[24px] text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#f2f2f2] md:flex">
+          <div className="hidden items-center gap-[24px] text-[14px] font-medium leading-[20px] tracking-[-0.28px] text-[#f8fafc] md:flex">
             {navigation.map((item) => (
               <a
                 key={item.href}
@@ -235,10 +270,10 @@ function FloatingHeader({
           <div className="hidden md:block">
             <PillButton
               label="Contact me"
-              href="#book"
+              href="#inquiry"
               bg="#f1f2f4"
               color="#181c23"
-              fill="#3a3a3a"
+              fill="#2563eb"
               textClass="text-[14px] leading-[20px] h-[20px]"
             />
           </div>
@@ -268,7 +303,8 @@ function FloatingHeader({
         </nav>
 
         <div
-          className={`absolute left-0 right-0 top-[calc(100%+8px)] origin-top rounded-[24px] bg-[#010101] p-[8px] shadow-[0_20px_40px_-16px_rgba(0,0,0,0.6)] transition-all duration-300 md:hidden ${
+          aria-hidden={!menuOpen}
+          className={`absolute left-0 right-0 top-[calc(100%+8px)] origin-top rounded-[24px] bg-[#0b1221] p-[8px] shadow-[0_20px_40px_-16px_rgba(0,0,0,0.6)] transition-all duration-300 md:hidden ${
             menuOpen
               ? "visible translate-y-0 scale-100 opacity-100"
               : "invisible -translate-y-2 scale-95 opacity-0"
@@ -279,13 +315,13 @@ function FloatingHeader({
               key={item.href}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="block rounded-[16px] px-[16px] py-[12px] text-[16px] font-medium text-[#f2f2f2] transition-colors hover:bg-white/10"
+              className="block rounded-[16px] px-[16px] py-[12px] text-[16px] font-medium text-[#f8fafc] transition-colors hover:bg-white/10"
             >
               {item.label}
             </a>
           ))}
           <a
-            href="#book"
+            href="#inquiry"
             onClick={() => setMenuOpen(false)}
             className="mt-[4px] block rounded-[999px] bg-[#f1f2f4] px-[16px] py-[12px] text-center text-[16px] font-medium text-[#181c23]"
           >
@@ -334,11 +370,11 @@ function HeroBackground({
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.68)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(11,18,33,0.22)_0%,rgba(11,18,33,0.72)_100%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/75 via-black/30 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#0b1221]/85 via-[#0b1221]/35 to-transparent"
       />
     </>
   );
@@ -353,30 +389,30 @@ function HeroPortraitCard({
 }) {
   return (
     <div
-      className="group relative flex w-full flex-col items-center justify-between overflow-hidden rounded-[20px] border border-solid border-white/15 bg-[#0c0c0c] px-[16px] pb-[16px] pt-[16px]"
+      className="group relative flex w-full flex-col items-center justify-between overflow-hidden rounded-[20px] border border-solid border-white/15 bg-[#0f1a30] px-[16px] pb-[16px] pt-[16px]"
       style={{ height }}
     >
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={practitioner.portraitSrc}
-          alt={`Editorial monochrome studio portrait of ${practitioner.name}`}
+          alt={`Editorial color studio portrait of ${practitioner.name}`}
           className="h-full w-full translate-y-[10px] object-cover object-[center_12%] opacity-85 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/10 to-black/75"
+          className="absolute inset-0 bg-gradient-to-b from-[#0b1221]/70 via-transparent to-[#0b1221]/75"
         />
       </div>
 
-      <p className="relative w-full text-[24px] font-medium leading-[32px] tracking-[-0.72px] text-[#f2f2f2]">
+      <p className="relative w-full text-[24px] font-medium leading-[32px] tracking-[-0.72px] text-[#f8fafc]">
         {practitioner.heroCardTitle}
       </p>
 
       <div className="relative flex w-full items-end justify-between gap-[12px]">
-        <p className="flex-1 text-[14px] leading-[20px] tracking-[-0.28px] text-[#f2f2f2]">
+        <p className="flex-1 text-[14px] leading-[20px] tracking-[-0.28px] text-[#f8fafc]">
           {practitioner.heroCardYear}
         </p>
-        <PillButton label="Let’s chat" href="#book" />
+        <PillButton label="Let’s chat" href="#inquiry" />
       </div>
     </div>
   );
@@ -407,28 +443,28 @@ function DesktopHero({
   return (
     <section
       id="home"
-      className="bg-[#f1f1f1]"
+      className="bg-[#f7f5f0]"
       style={{ padding: HERO_FRAME_INSET }}
     >
       <div
-        className="relative overflow-hidden rounded-[24px] bg-[#060606]"
+        className="relative overflow-hidden rounded-[24px] bg-[#0b1221]"
         style={{ height: frameHeight }}
       >
         <HeroBackground src={practitioner.heroBackgroundSrc} />
 
         <div
-          className="absolute left-0 top-0"
+          className="absolute left-1/2 top-0"
           style={{
             width: HERO_INNER_WIDTH,
             height: innerHeight,
-            transform: `scale(${scale})`,
-            transformOrigin: "top left",
+            transform: `translateX(-50%) scale(${scale})`,
+            transformOrigin: "top center",
           }}
         >
           {[106, 392, 678, 964, 1250].map((left, idx) => (
             <CrosshairPlusIcon
               key={left}
-              className="absolute h-[24px] w-[24px] text-white/80 transition-transform duration-700 hover:rotate-90"
+              className="absolute h-[24px] w-[24px] text-[#93c5fd] transition-transform duration-700 hover:rotate-90"
               style={{
                 left,
                 top: contentTop - 32,
@@ -449,13 +485,13 @@ function DesktopHero({
               width: 1288,
             }}
           >
-            <div className="flex w-[440px] flex-col gap-[111px]">
+            <div className="flex w-[440px] flex-col gap-[102px]">
               <Reveal>
-                <div className="relative h-[119px] whitespace-nowrap">
+                <div className="relative h-[132px] whitespace-nowrap">
                   <h1 className="text-[80px] font-semibold leading-[98px] tracking-[-5.6px] text-white">
                     {practitioner.wordmark}®
                   </h1>
-                  <p className="absolute left-[138px] top-[89px] text-right text-[20px] leading-[30px] tracking-[-0.2px] text-[#f2f2f2]">
+                  <p className="absolute left-[152px] top-[98px] text-right text-[20px] leading-[30px] tracking-[-0.2px] text-[#f8fafc]">
                     {practitioner.heroSubtitle}
                   </p>
                 </div>
@@ -464,7 +500,7 @@ function DesktopHero({
               <Reveal delay={200}>
                 <p className="text-[20px] leading-[30px] tracking-[-0.2px] text-white">
                   —{" "}
-                  <span className="text-[#d9d9d9]">
+                  <span className="text-[#bfdbfe]">
                     {practitioner.heroStatementLead}
                   </span>{" "}
                   {practitioner.heroStatementBody}
@@ -476,7 +512,7 @@ function DesktopHero({
               <Reveal delay={150}>
                 <div className="flex flex-col items-end gap-[8px]">
                   <MonogramStack items={heroBadges} tone="dark" />
-                  <p className="whitespace-nowrap text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#f2f2f2]">
+                  <p className="whitespace-nowrap text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#f8fafc]">
                     {practitioner.heroBadgeLabel}
                   </p>
                 </div>
@@ -503,9 +539,9 @@ function MobileHero({
   return (
     <section
       id="home"
-      className="flex flex-col bg-[#f1f1f1] px-[15px] py-[16px] md:h-[100svh] md:min-h-[600px] md:p-[30px]"
+      className="flex flex-col bg-[#f7f5f0] px-[15px] py-[16px] md:h-[100svh] md:min-h-[600px] md:p-[30px]"
     >
-      <div className="relative flex min-h-[815px] flex-col justify-end overflow-hidden rounded-[24px] bg-[#060606] px-[16px] pb-[22px] pt-[118px] md:min-h-0 md:flex-1 md:px-[40px] md:pb-[40px] md:pt-[110px]">
+      <div className="relative flex min-h-[815px] flex-col justify-end overflow-hidden rounded-[24px] bg-[#0b1221] px-[16px] pb-[22px] pt-[118px] md:min-h-0 md:flex-1 md:px-[40px] md:pb-[40px] md:pt-[110px]">
         <HeroBackground
           src={practitioner.heroBackgroundSrc}
           className="object-[48%_center]"
@@ -514,11 +550,11 @@ function MobileHero({
         <div className="relative flex flex-col gap-[30px] md:gap-[40px] md:landscape:grid md:landscape:grid-cols-[1fr_290px] md:landscape:items-end md:landscape:gap-[32px]">
           <div className="flex flex-col items-end gap-[20px] md:items-start md:gap-[40px]">
             <Reveal className="self-stretch">
-              <div className="relative mx-auto w-fit whitespace-nowrap pb-[24px] md:mx-0">
-                <h1 className="text-[76px] font-semibold leading-[92px] tracking-[-5.2px] text-white md:text-[116px] md:leading-[124px] md:tracking-[-7.6px]">
+              <div className="relative mx-auto w-fit max-w-full whitespace-nowrap pb-[30px] md:mx-0">
+                <h1 className="text-[clamp(50px,17vw,76px)] font-semibold leading-[1.12] tracking-[-0.065em] text-white md:text-[116px] md:leading-[124px] md:tracking-[-7.6px]">
                   {practitioner.wordmark}®
                 </h1>
-                <p className="absolute bottom-0 right-0 text-[18px] leading-[28px] tracking-[-0.18px] text-[#f2f2f2] md:text-[20px]">
+                <p className="absolute bottom-0 right-0 text-[15px] leading-[24px] tracking-[-0.18px] text-[#f8fafc] sm:text-[18px] sm:leading-[28px] md:text-[20px]">
                   {practitioner.heroSubtitle}
                 </p>
               </div>
@@ -527,7 +563,7 @@ function MobileHero({
             <Reveal delay={150}>
               <p className="text-[18px] leading-[28px] tracking-[-0.18px] text-white md:max-w-[420px] md:text-[20px] md:leading-[30px]">
                 —{" "}
-                <span className="text-[#d9d9d9]">
+                <span className="text-[#bfdbfe]">
                   {practitioner.heroStatementLead}
                 </span>{" "}
                 {practitioner.heroStatementBody}
@@ -539,7 +575,7 @@ function MobileHero({
             <Reveal delay={200}>
               <div className="flex flex-col items-end gap-[8px]">
                 <MonogramStack items={heroBadges} tone="dark" />
-                <p className="whitespace-nowrap text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#f2f2f2]">
+                <p className="whitespace-nowrap text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#f8fafc]">
                   {practitioner.heroBadgeLabel}
                 </p>
               </div>

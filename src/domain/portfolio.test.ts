@@ -31,7 +31,27 @@ describe("Portfolio domain seam (CV ATS Cahyati_Update.docx fidelity)", () => {
     expect(titles).toMatch(/Pekan Ilmiah Andalas/i);
   });
 
-  it("grounds case studies, capabilities, track record, and FAQs in authentic data engineering facts with zero leftover Capture copy", () => {
+  it("includes her complete YIA internship experience and all 12 verified leadership mandates from her CV", () => {
+    const snapshot = getPortfolioSnapshot();
+
+    expect(snapshot.workExperience).toHaveLength(1);
+    const yia = snapshot.workExperience[0];
+    expect(yia?.organization).toBe("PT Angkasa Pura Indonesia (YIA)");
+    expect(yia?.period).toBe("June 2025 – August 2025");
+    expect(yia?.highlights).toHaveLength(6);
+
+    expect(snapshot.leadershipMandates).toHaveLength(12);
+    const allMandates = snapshot.leadershipMandates
+      .map((m) => `${m.role} ${m.organization}`)
+      .join(" | ");
+    expect(allMandates).toMatch(/BLM FT-UNSIL/i);
+    expect(allMandates).toMatch(/MABIM/i);
+    expect(allMandates).toMatch(/Graphic Design Training|Desain Grafis/i);
+    expect(allMandates).toMatch(/OMBUS SI/i);
+    expect(allMandates).toMatch(/Sivolution/i);
+  });
+
+  it("grounds case studies, capabilities, track record, and FAQs in authentic data engineering facts with exact CV counts and zero leftover Capture copy", () => {
     const snapshot = getPortfolioSnapshot();
     const serialized = JSON.stringify(snapshot);
 
@@ -39,8 +59,13 @@ describe("Portfolio domain seam (CV ATS Cahyati_Update.docx fidelity)", () => {
     expect(snapshot.capabilities).toHaveLength(5);
     expect(snapshot.trackRecordHighlights).toHaveLength(3);
     expect(snapshot.faqEntries).toHaveLength(5);
-    expect(snapshot.galleryFrames).toHaveLength(14);
-    expect(snapshot.leadershipMandates.length).toBeGreaterThanOrEqual(6);
+    expect(snapshot.galleryFrames).toHaveLength(12);
+    expect(new Set(snapshot.galleryFrames.map((f) => f.imageSrc)).size).toBe(12);
+
+    // Exact verifiable CV counts (no inflated "+" where exact count is known)
+    expect(snapshot.whySection.secondaryMetric.value).toBe("7");
+    expect(serialized).not.toMatch(/\b12\+/);
+    expect(serialized).not.toMatch(/"value":"7\+"/);
 
     // Authentic CV markers must exist
     expect(serialized).toMatch(/Angkasa Pura/i);
@@ -48,6 +73,15 @@ describe("Portfolio domain seam (CV ATS Cahyati_Update.docx fidelity)", () => {
     expect(serialized).toMatch(/BigQuery/i);
     expect(serialized).toMatch(/Power BI/i);
     expect(serialized).toMatch(/Looker Studio/i);
+
+    // Domain-aligned anchor IDs matching GLOSSARY.md (zero Capture #book/#services/#testimonials leftovers)
+    const navHrefs = [...snapshot.navigation, ...snapshot.footerNavigation].map(
+      (n) => n.href,
+    );
+    expect(navHrefs).not.toContain("#services");
+    expect(navHrefs).not.toContain("#testimonials");
+    expect(navHrefs).not.toContain("#book");
+    expect(navHrefs).toContain("#capabilities");
 
     // Zero leftover photography template markers or external Jiro CDN hotlinks
     expect(serialized).not.toMatch(/cdn\.jiro\.build/i);
