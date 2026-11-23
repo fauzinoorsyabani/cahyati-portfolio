@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.vercel/
+.audit_tmp/
+.DS_Store
+*.local
+*.tsbuildinfo
+*.docx

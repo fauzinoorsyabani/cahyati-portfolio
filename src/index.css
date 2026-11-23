@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #f1f1f1;
+    color: #030303;
+    font-family: "Manrope", system-ui, -apple-system, sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #030303;
+    color: #f2f2f2;
+  }
+}
+
+.font-editorial {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-wordmark {
+  font-family: "Inter", "Manrope", sans-serif;
+}
+
+.link-underline-reveal {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 0% 2px;
+  transition: background-size 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline-reveal:hover,
+.link-underline-reveal:focus-visible {
+  background-size: 100% 2px;
+}
+
+.link-underline-retract {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 100% 92%;
+  background-size: 100% 2px;
+  transition: background-size 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline-retract:hover,
+.link-underline-retract:focus-visible {
+  background-size: 0% 2px;
+}
