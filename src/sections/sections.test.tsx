@@ -3,11 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { getPortfolioSnapshot } from "../domain/portfolio";
 import { AboutSection } from "./AboutSection";
+import { CapabilitiesSection } from "./CapabilitiesSection";
 import { ContactFormSection } from "./ContactFormSection";
 import { FaqSection } from "./FaqSection";
 import { GallerySection } from "./GallerySection";
 import { ProjectsSection } from "./ProjectsSection";
-import { ServicesSection } from "./ServicesSection";
 import { TrackRecordSection } from "./TrackRecordSection";
 
 const snapshot = getPortfolioSnapshot();
@@ -31,6 +31,9 @@ describe("Interactive UI section seams", () => {
     await user.click(trigger);
 
     const dialog = screen.getByRole("dialog");
+    expect(dialog.className).toContain("bg-[#f7f5f0]");
+    expect(dialog.className).toContain("text-[#0f172a]");
+    expect(dialog.className).not.toContain("bg-[#f1f1f1]");
     expect(dialog).toHaveTextContent("Universitas Siliwangi");
     expect(dialog).toHaveTextContent("3.92 / 4.00");
     expect(dialog).toHaveTextContent("PT Angkasa Pura Indonesia (YIA)");
@@ -69,9 +72,9 @@ describe("Interactive UI section seams", () => {
     expect(document.activeElement).toBe(cardButton);
   });
 
-  it("ServicesSection activates capability description when selecting an item", async () => {
+  it("CapabilitiesSection activates capability description when selecting an item", async () => {
     const user = userEvent.setup();
-    render(<ServicesSection capabilities={snapshot.capabilities} />);
+    render(<CapabilitiesSection capabilities={snapshot.capabilities} />);
 
     const bigQueryButton = screen.getByRole("button", {
       name: /BigQuery & Modeling/i,
@@ -172,7 +175,11 @@ describe("Interactive UI section seams", () => {
     ).toBeVisible();
     expect(openMailto).not.toHaveBeenCalled();
 
-    await user.type(screen.getByLabelText(/^Name$/i), "Rani Putri");
+    const nameInput = screen.getByLabelText(/^Name$/i);
+    expect(nameInput.className).toContain("placeholder:text-[#64748b]");
+    expect(nameInput.className).not.toContain("placeholder:text-[#2563eb]");
+
+    await user.type(nameInput, "Rani Putri");
     await user.type(screen.getByLabelText(/^Email$/i), "bad-email");
     await user.type(
       screen.getByLabelText(/^Message$/i),

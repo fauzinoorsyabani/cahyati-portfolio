@@ -1,12 +1,12 @@
 import { getPortfolioSnapshot } from "./domain/portfolio";
 import { AboutSection } from "./sections/AboutSection";
+import { CapabilitiesSection } from "./sections/CapabilitiesSection";
 import { ContactFormSection } from "./sections/ContactFormSection";
 import { FaqSection } from "./sections/FaqSection";
 import { FooterSection } from "./sections/FooterSection";
 import { GallerySection } from "./sections/GallerySection";
 import { HeroSection } from "./sections/HeroSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
-import { ServicesSection } from "./sections/ServicesSection";
 import { TaglineSection } from "./sections/TaglineSection";
 import { TrackRecordSection } from "./sections/TrackRecordSection";
 import { WhyChooseMeSection } from "./sections/WhyChooseMeSection";
@@ -29,7 +29,7 @@ export function App() {
         leadershipMandates={portfolio.leadershipMandates}
       />
       <ProjectsSection caseStudies={portfolio.caseStudies} />
-      <ServicesSection capabilities={portfolio.capabilities} />
+      <CapabilitiesSection capabilities={portfolio.capabilities} />
       <WhyChooseMeSection
         practitioner={portfolio.practitioner}
         whySection={portfolio.whySection}

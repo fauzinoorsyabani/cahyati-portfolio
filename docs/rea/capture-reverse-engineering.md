@@ -20,13 +20,13 @@ Entry composition (`108497` / `index.tsx` -> `0r17c4.r7a2r~.js`) renders 11 sect
 | 10 | `Tagline.tsx` | `808199` | Giant `120px` continuous horizontal marquee statement with Playfair italic `#a8a8a8` accent word | `#f1f1f1` |
 | 11 | `Footer.tsx` | `500582` | Closing headline, Email / Call / Social circular pills, divider `#2c323b`, menu + copyright, giant `354.7px` wordmark with per-letter Web Animations hover wave + real-time Canvas-generated SVG RGB chromatic displacement glass prism (`feDisplacementMap` × 3 channels screened) | `#010101` |
 
-## 2. Recovered Design System Tokens
+## 2. Recovered Design System Tokens (Capture Reference Baseline)
 
 - **Typography**:
   - Primary UI & Editorial Sans: `Manrope` (weights 400, 500, 600), tight negative display tracking (`-2.16px` at `54px`, `-5.6px` at `80px`, `-7.2px` at `120px`)
   - Editorial Italic Accent: `Playfair Display` italic 400 (`70px` desktop / `40px–60px` responsive)
   - Wordmark Display: `Inter` (weights 400, 500, 600; giant footer wordmark `354.711px`, `-24.8322px` tracking)
-- **Color Palette**:
+- **Original Capture Monochrome Palette (Before Cahyati Adaptation)**:
   - Light Surface: `#f1f1f1`
   - Elevated Card Surface: `#ffffff`
   - Dark Surface / Shutter / Nav Pill: `#010101` (refraction band `#080808`)
@@ -35,12 +35,21 @@ Entry composition (`108497` / `index.tsx` -> `0r17c4.r7a2r~.js`) renders 11 sect
   - Primary Ink (Dark): `#f2f2f2` / `#ffffff`, Muted Ink (Dark): `#767676`, Dark Divider: `#444444` / `#2c323b`
 - **Motion Language**:
   - Primary Easing: `cubic-bezier(0.16, 1, 0.3, 1)`
-  - Scroll Reveal: `opacity: 0 -> 1`, `translateY(64px) scale(0.96) -> none`, `blur(12px) -> none`, `1100ms`, `IntersectionObserver` threshold `0.15`, disabled cleanly under `prefers-reduced-motion: reduce`.
+  - Scroll Reveal: `opacity: 0 -> 1`, `translateY(64px) scale(0.96) -> none`, `blur(12px) -> none`, `850ms`–`1100ms`, `IntersectionObserver`, disabled cleanly under `prefers-reduced-motion: reduce`.
   - Preloader: 6 vertical bars lifting with `transformOrigin: "50% -15.6%"`, `scaleY(1 -> 0)`, `580ms`, `105ms` stagger, preceded by rolling character slot reels (`36ms` stagger).
   - Pill CTA: Dual stacked label vertical shift (`-translate-y-full`) paired with horizontal rounded fill sweep (`-translate-x-[101%] -> 0`).
 
 ## 3. Adaptation to Cahyati (`CV ATS Cahyati_Update.docx`)
 
 - **Wordmark Symmetry**: `capture®` (7 letters + `®`) maps directly to `cahyati®` (7 letters + `®`), preserving exact preloader reel cadence and giant footer refraction width.
+- **Active Color-Themed Palette (Warm Ivory, Deep Navy, Royal Blue, Amber)**:
+  - Light Surface & Modal Surface: Warm Ivory `#f7f5f0` (replacing Capture's `#f1f1f1`)
+  - Elevated Card Surface: `#ffffff` with warm stone borders `#dfd9cc` / `#e8e3d9`
+  - Dark Surface / Shutter / Nav Pill / Capabilities / Footer: Deep Navy `#0b1221` (refraction band `#101b33`, media backing `#13203b`, dark divider `#1e2f4f`)
+  - Primary Accent: Royal Blue `#2563eb` / `#1d4ed8` (Playfair italic highlights, CTA sweep fill, focus rings, `{01}` index markers)
+  - Secondary Accent: Warm Amber `#fbbf24` / `#f59e0b` (footer Playfair accent, track-record star row)
+  - Light-Surface Ink: Primary `#0f172a`, Secondary `#334155` / `#475569`, Muted / Form Placeholders `#64748b`
+  - Dark-Surface Ink: Primary `#f8fafc` / `#ffffff`, Muted `#94a3b8` / `#64748b`, Blue Highlight `#bfdbfe` / `#93c5fd`
+- **Full-Color Authentic Visuals & Portrait**: Replaces Capture's monochrome stock imagery with 12 verified local full-color photographs under `public/images/` (airport terminal concourse, airport apron GSE operations, open-nose 747 cargo freighter, Dell network switch ETL cabling, sunlit laptop analytics screen, curved university library atrium, sunset aerial cloud data center, terracotta/blue-glass architectural facade, glass-walled open office, and Cahyati's real formal CV portraits `cahyati-hero-portrait.jpg` and `cahyati-about-portrait.jpg`).
 - **Authentic Data Only**: Every biography line, internship project (PT Angkasa Pura Indonesia YIA GSE 1,000+ QR-Code & ETL), academic metric (`3.92 / 4.00`, Universitas Siliwangi S1 Sistem Informasi), tool (`Google BigQuery`, `Power BI`, `Looker Studio`, `Microsoft Excel`, `Canva`), certification (7 verified entries including `BNSP Data Analyst` & `RevoU Tech Academy`), and leadership mandate (`BLM FT-UNSIL`, `HMSI FT-UNSIL`, `Kopma Unsil`) is sourced verbatim from the CV.
-- **Refactored Deep Architecture**: Replaces Capture's 11-way copy-pasted utility hooks with deep, tested modules (`src/domain/`, `src/primitives/`, `src/sections/`).
+- **Refactored Deep Architecture & Glossary Compliance**: Replaces Capture's 11-way copy-pasted utility hooks with deep, tested modules (`src/domain/`, `src/primitives/`, `src/sections/`), renaming `Services.tsx` -> `CapabilitiesSection.tsx` and `Testimonial.tsx` -> `TrackRecordSection.tsx` in accordance with `GLOSSARY.md`.

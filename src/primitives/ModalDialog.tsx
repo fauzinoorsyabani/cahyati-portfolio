@@ -73,7 +73,7 @@ export function ModalDialog({
 
   return (
     <div
-      className="fixed inset-0 z-[90] flex items-center justify-center bg-black/70 p-[16px] backdrop-blur-[4px]"
+      className="fixed inset-0 z-[90] flex items-center justify-center bg-[#0b1221]/75 p-[16px] backdrop-blur-[4px]"
       onClick={onClose}
     >
       <div
@@ -83,7 +83,7 @@ export function ModalDialog({
         aria-labelledby={labelledBy}
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
-        className={`max-h-[88vh] w-full ${maxWidthClass} overflow-y-auto rounded-[24px] bg-[#f1f1f1] text-[#030303] shadow-[0_32px_80px_-20px_rgba(0,0,0,0.65)] outline-none ${panelClassName}`}
+        className={`max-h-[88vh] w-full ${maxWidthClass} overflow-y-auto rounded-[24px] bg-[#f7f5f0] text-[#0f172a] shadow-[0_32px_80px_-20px_rgba(11,18,33,0.65)] ring-1 ring-[#dfd9cc]/70 outline-none ${panelClassName}`}
       >
         {children}
       </div>

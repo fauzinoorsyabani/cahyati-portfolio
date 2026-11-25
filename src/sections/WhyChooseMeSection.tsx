@@ -55,7 +55,7 @@ function PolaroidCluster({
                   src={item.imageSrc}
                   alt={item.imageAlt}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover object-[center_42%]"
                 />
               </div>
             </div>
@@ -116,13 +116,13 @@ function TileMarqueeCard({
           {row.tiles.map((tile) => (
             <div
               key={tile.id}
-              className="relative mr-[1px] h-[108px] w-[134px] shrink-0 overflow-hidden bg-[#1a1a1a]"
+              className="relative mr-[1px] h-[108px] w-[134px] shrink-0 overflow-hidden bg-[#13203b]"
             >
               <img
                 src={tile.imageSrc}
                 alt={tile.imageAlt}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+                className="absolute inset-0 h-full w-full object-cover object-[center_42%] transition-transform duration-700 hover:scale-110"
               />
             </div>
           ))}
@@ -148,7 +148,7 @@ function LinkedInHighlightCard({
         src={practitioner.portraitSrc}
         alt={`${practitioner.name} professional LinkedIn profile`}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover object-[center_18%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+        className="absolute inset-0 h-full w-full object-cover object-[center_38%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
       />
       <div
         aria-hidden="true"
@@ -171,7 +171,7 @@ function ViewfinderCard({ whySection }: { whySection: WhySectionData }) {
         src={whySection.viewfinderImageSrc}
         alt={whySection.viewfinderImageAlt}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+        className="absolute inset-0 h-full w-full object-cover object-[center_40%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
       />
       <div
         aria-hidden="true"
@@ -264,7 +264,7 @@ export function WhyChooseMeSection({
             src={whySection.detailImageSrc}
             alt={whySection.detailImageAlt}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+            className="h-full w-full object-cover object-[center_46%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
           />
         </div>
       </Reveal>
@@ -333,7 +333,7 @@ export function WhyChooseMeSection({
             src={whySection.detailImageSrc}
             alt={whySection.detailImageAlt}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[center_46%]"
           />
         </Reveal>
       </div>

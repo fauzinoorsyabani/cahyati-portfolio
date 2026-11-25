@@ -57,9 +57,9 @@ function FeaturePortrait({
     <div className="group relative h-full w-full overflow-hidden rounded-[24px] bg-[#e5e0d5]">
       <img
         src={src}
-        alt={`${name} at a minimalist studio workspace`}
+        alt={`Graduation portrait of ${name} holding her golden tassel beside a slate brick wall`}
         loading="lazy"
-        className="h-full w-full object-cover object-center transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+        className="h-full w-full object-cover object-[center_36%] transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
       />
       <button
         type="button"
@@ -116,7 +116,7 @@ function CvSnapshotModal({
     >
       <div className="flex items-start justify-between gap-[16px]">
         <div>
-          <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#666]">
+          <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#1d4ed8]">
             Verified CV Dossier
           </p>
           <h3
@@ -136,14 +136,14 @@ function CvSnapshotModal({
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="flex h-[40px] w-[40px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-white text-[#0f172a] transition-transform duration-300 hover:scale-105"
+          className="flex h-[40px] w-[40px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#dfd9cc] bg-white text-[#0f172a] transition-[transform,border-color,color] duration-300 hover:scale-105 hover:border-[#2563eb] hover:text-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           <CloseIcon className="h-[18px] w-[18px]" />
         </button>
       </div>
 
-      <div className="mt-[24px] rounded-[16px] bg-white p-[20px]">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+      <div className="mt-[24px] rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
           Work &amp; Internship Experience
         </p>
         <div className="mt-[12px] space-y-[16px]">
@@ -153,11 +153,11 @@ function CvSnapshotModal({
                 <p className="text-[16px] font-semibold text-[#0f172a]">
                   {exp.role} · {exp.organization}
                 </p>
-                <span className="text-[13px] font-medium text-[#666]">
+                <span className="text-[13px] font-medium text-[#64748b]">
                   {exp.period}
                 </span>
               </div>
-              <ul className="mt-[10px] list-disc space-y-[6px] pl-[18px] text-[14px] leading-[22px] text-[#333]">
+              <ul className="mt-[10px] list-disc space-y-[6px] pl-[18px] text-[14px] leading-[22px] text-[#334155]">
                 {exp.highlights.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}
@@ -168,15 +168,15 @@ function CvSnapshotModal({
       </div>
 
       <div className="mt-[20px] grid grid-cols-1 gap-[16px] md:grid-cols-2">
-        <div className="rounded-[16px] bg-white p-[20px]">
-          <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+        <div className="rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
             Technical Stack
           </p>
           <div className="mt-[12px] flex flex-wrap gap-[8px]">
             {practitioner.technicalSkills.map((skill) => (
               <span
                 key={skill}
-                className="rounded-[999px] bg-[#f7f5f0] px-[12px] py-[5px] text-[13px] font-medium text-[#0f172a]"
+                className="rounded-[999px] border border-[#e8e3d9] bg-[#f7f5f0] px-[12px] py-[5px] text-[13px] font-medium text-[#0f172a]"
               >
                 {skill}
               </span>
@@ -184,8 +184,8 @@ function CvSnapshotModal({
           </div>
         </div>
 
-        <div className="rounded-[16px] bg-white p-[20px]">
-          <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+        <div className="rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
             Focus Areas &amp; Strengths
           </p>
           <div className="mt-[12px] flex flex-wrap gap-[8px]">
@@ -203,11 +203,11 @@ function CvSnapshotModal({
         </div>
       </div>
 
-      <div className="mt-[20px] rounded-[16px] bg-white p-[20px]">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+      <div className="mt-[20px] rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
           Certifications &amp; Awards ({credentials.length})
         </p>
-        <ul className="mt-[12px] divide-y divide-[#ececec]">
+        <ul className="mt-[12px] divide-y divide-[#e8e3d9]">
           {credentials.map((cred) => (
             <li
               key={cred.id}
@@ -217,9 +217,9 @@ function CvSnapshotModal({
                 <p className="text-[15px] font-semibold text-[#0f172a]">
                   {cred.title}
                 </p>
-                <p className="text-[13px] text-[#555]">{cred.issuer}</p>
+                <p className="text-[13px] text-[#475569]">{cred.issuer}</p>
               </div>
-              <span className="shrink-0 text-[13px] font-medium text-[#666]">
+              <span className="shrink-0 text-[13px] font-medium text-[#64748b]">
                 {cred.period}
               </span>
             </li>
@@ -227,8 +227,8 @@ function CvSnapshotModal({
         </ul>
       </div>
 
-      <div className="mt-[20px] rounded-[16px] bg-white p-[20px]">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+      <div className="mt-[20px] rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
           Leadership Mandates ({leadershipMandates.length})
         </p>
         <ul className="mt-[12px] space-y-[12px]">
@@ -241,7 +241,7 @@ function CvSnapshotModal({
                 <p className="text-[15px] font-semibold text-[#0f172a]">
                   {mandate.role} · {mandate.organization}
                 </p>
-                <span className="text-[13px] text-[#666]">
+                <span className="text-[13px] text-[#64748b]">
                   {mandate.period}
                 </span>
               </div>

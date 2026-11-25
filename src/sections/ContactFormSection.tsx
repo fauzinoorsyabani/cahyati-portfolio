@@ -5,7 +5,7 @@ import { Reveal } from "../primitives/Motion";
 import { ScaledStage, StageShell } from "../primitives/Stage";
 
 const INPUT_CLASS =
-  "w-full rounded-[10px] border border-solid border-[#dfd9cc] bg-[#f7f5f0] px-[14px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#0f172a] outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-[#2563eb] hover:border-[#cfcfcf] focus:border-[#2563eb] focus:bg-white focus:shadow-[0_0_0_4px_rgba(37,99,235,0.14)]";
+  "w-full rounded-[10px] border border-solid border-[#dfd9cc] bg-[#f7f5f0] px-[14px] text-[16px] leading-[22px] tracking-[-0.16px] text-[#0f172a] outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-[#64748b] hover:border-[#c4bdb0] focus:border-[#2563eb] focus:bg-white focus:shadow-[0_0_0_4px_rgba(37,99,235,0.14)]";
 
 const LABEL_CLASS =
   "text-[16px] font-medium leading-[22px] tracking-[-0.16px] text-[#0f172a]";
@@ -25,7 +25,7 @@ function PractitionerBadge({
         <img
           src={practitioner.portraitSrc}
           alt={practitioner.name}
-          className="absolute inset-0 h-full w-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-110"
+          className="absolute inset-0 h-full w-full object-cover object-[center_44%] transition-transform duration-700 group-hover:scale-110"
         />
       </div>
       <div className="flex flex-col">

@@ -83,12 +83,13 @@ describe("Portfolio domain seam (CV ATS Cahyati_Update.docx fidelity)", () => {
     expect(navHrefs).not.toContain("#book");
     expect(navHrefs).toContain("#capabilities");
 
-    // Zero leftover photography template markers or external Jiro CDN hotlinks
+    // Zero leftover photography template markers, stale monochrome descriptions, or external Jiro CDN hotlinks
     expect(serialized).not.toMatch(/cdn\.jiro\.build/i);
     expect(serialized).not.toMatch(/capture@gmail\.com/i);
     expect(serialized).not.toMatch(/Wick Million/i);
     expect(serialized).not.toMatch(/FORMA STUDIO/i);
     expect(serialized).not.toMatch(/Weddings|Bride and Groom|photographer/i);
+    expect(serialized).not.toMatch(/monochrome/i);
   });
 
   it("serves every visual asset from local /images/ paths", () => {

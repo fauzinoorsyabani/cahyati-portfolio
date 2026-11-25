@@ -147,7 +147,7 @@ function CylinderCarousel({ frames }: { frames: readonly GalleryFrame[] }) {
         if (event.pointerType !== "touch") setHovered(true);
       }}
       onPointerLeave={() => setHovered(false)}
-      className={`relative select-none touch-pan-y outline-none focus-visible:ring-2 focus-visible:ring-[#030303]/40 focus-visible:ring-offset-4 ${
+      className={`relative select-none touch-pan-y outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]/60 focus-visible:ring-offset-4 focus-visible:ring-offset-[#f7f5f0] ${
         dragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       style={{ width: CAROUSEL_WIDTH, height: 640 }}

@@ -68,13 +68,14 @@ function CaseStudyCard({
           alt={study.imageAlt}
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+          style={{ objectPosition: study.objectPosition }}
         />
       </div>
       <div className="flex flex-col gap-[2px]">
         <p className={`font-semibold text-[#0f172a] ${titleClass}`}>
           <span className="link-underline-reveal">{study.title}</span>
         </p>
-        <p className="text-[14px] leading-[20px] tracking-[-0.14px] text-[#666]">
+        <p className="text-[14px] leading-[20px] tracking-[-0.14px] text-[#475569]">
           {study.organization} · {study.period}
         </p>
       </div>
@@ -98,7 +99,7 @@ function CaseStudyModal({
     >
       <div className="flex items-start justify-between gap-[16px]">
         <div>
-          <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#666]">
+          <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#1d4ed8]">
             {study.category} · {study.period}
           </p>
           <h3
@@ -115,7 +116,7 @@ function CaseStudyModal({
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="flex h-[40px] w-[40px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-white text-[#0f172a] transition-transform duration-300 hover:scale-105"
+          className="flex h-[40px] w-[40px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#dfd9cc] bg-white text-[#0f172a] transition-[transform,border-color,color] duration-300 hover:scale-105 hover:border-[#2563eb] hover:text-[#2563eb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           <CloseIcon className="h-[18px] w-[18px]" />
         </button>
@@ -126,18 +127,19 @@ function CaseStudyModal({
           src={study.imageSrc}
           alt={study.imageAlt}
           className="h-full w-full object-cover"
+          style={{ objectPosition: study.objectPosition }}
         />
       </div>
 
-      <p className="mt-[20px] text-[16px] leading-[26px] text-[#333]">
+      <p className="mt-[20px] text-[16px] leading-[26px] text-[#334155]">
         {study.summary}
       </p>
 
-      <div className="mt-[20px] rounded-[16px] bg-white p-[20px]">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#666]">
+      <div className="mt-[20px] rounded-[16px] border border-[#e8e3d9] bg-white p-[20px]">
+        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#475569]">
           Verified Outcomes
         </p>
-        <ul className="mt-[10px] list-disc space-y-[8px] pl-[18px] text-[15px] leading-[24px] text-[#222]">
+        <ul className="mt-[10px] list-disc space-y-[8px] pl-[18px] text-[15px] leading-[24px] text-[#1e293b]">
           {study.outcomes.map((outcome) => (
             <li key={outcome}>{outcome}</li>
           ))}

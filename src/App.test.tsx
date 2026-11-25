@@ -43,17 +43,27 @@ describe("Full portfolio application seam", () => {
     }
   });
 
-  it("references only existing local image files under public/images and zero external Capture URLs", () => {
+  it("references only existing local image files under public/images, ships zero orphan images, and uses accurate non-monochrome alt descriptions", () => {
     const { container } = render(<App />);
     const images = Array.from(container.querySelectorAll("img"));
     expect(images.length).toBeGreaterThan(25);
 
     const publicDir = path.resolve(process.cwd(), "public");
+    const referencedFiles = new Set<string>();
     for (const img of images) {
       const src = img.getAttribute("src") ?? "";
       expect(src).toMatch(/^\/images\/[a-z0-9-]+\.jpg$/);
       expect(fs.existsSync(path.join(publicDir, src))).toBe(true);
+      referencedFiles.add(path.basename(src));
+
+      const alt = img.getAttribute("alt") ?? "";
+      expect(alt).not.toMatch(/monochrome/i);
     }
+
+    const shippedFiles = fs
+      .readdirSync(path.join(publicDir, "images"))
+      .filter((name) => !name.startsWith("."));
+    expect(shippedFiles.sort()).toEqual(Array.from(referencedFiles).sort());
   });
 
   it("toggles the mobile navigation drawer when viewport is below 1024px", async () => {

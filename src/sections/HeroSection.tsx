@@ -395,8 +395,8 @@ function HeroPortraitCard({
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={practitioner.portraitSrc}
-          alt={`Editorial color studio portrait of ${practitioner.name}`}
-          className="h-full w-full translate-y-[10px] object-cover object-[center_12%] opacity-85 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+          alt={`Twilight graduation portrait of ${practitioner.name}`}
+          className="h-full w-full object-cover object-[center_42%] opacity-90 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
         />
         <div
           aria-hidden="true"
@@ -450,7 +450,10 @@ function DesktopHero({
         className="relative overflow-hidden rounded-[24px] bg-[#0b1221]"
         style={{ height: frameHeight }}
       >
-        <HeroBackground src={practitioner.heroBackgroundSrc} />
+        <HeroBackground
+          src={practitioner.heroBackgroundSrc}
+          className="object-[center_36%]"
+        />
 
         <div
           className="absolute left-1/2 top-0"
@@ -544,7 +547,7 @@ function MobileHero({
       <div className="relative flex min-h-[815px] flex-col justify-end overflow-hidden rounded-[24px] bg-[#0b1221] px-[16px] pb-[22px] pt-[118px] md:min-h-0 md:flex-1 md:px-[40px] md:pb-[40px] md:pt-[110px]">
         <HeroBackground
           src={practitioner.heroBackgroundSrc}
-          className="object-[48%_center]"
+          className="object-[52%_38%]"
         />
 
         <div className="relative flex flex-col gap-[30px] md:gap-[40px] md:landscape:grid md:landscape:grid-cols-[1fr_290px] md:landscape:items-end md:landscape:gap-[32px]">

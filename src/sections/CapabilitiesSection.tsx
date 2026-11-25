@@ -3,7 +3,7 @@ import { type Capability, formatIndexTag } from "../domain/portfolio";
 import { Reveal } from "../primitives/Motion";
 import { absBox, ScaledStage, StageShell } from "../primitives/Stage";
 
-export function ServicesSection({
+export function CapabilitiesSection({
   capabilities,
 }: {
   capabilities: readonly Capability[];
@@ -87,7 +87,7 @@ export function ServicesSection({
                 onMouseEnter={() => setActiveIndex(idx)}
                 onFocus={() => setActiveIndex(idx)}
                 onClick={() => setActiveIndex(idx)}
-                className="group relative block h-full w-full cursor-pointer text-left"
+                className="group relative block h-full w-full cursor-pointer rounded-[6px] text-left outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0b1221]"
               >
                 <span
                   className="absolute left-0 top-0 flex items-start gap-[4px] whitespace-nowrap transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
